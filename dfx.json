@@ -1,0 +1,26 @@
+{
+  "canisters": {
+    "miyu-fix-backend": {
+      "main": "src/miyu-fix-backend/main.mo",
+      "type": "motoko"
+    },
+    "miyu-fix-frontend": {
+      "dependencies": [
+        "miyu-fix-backend"
+      ],
+      "source": [
+        "src/miyu-fix-frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "miyu-fix-frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
