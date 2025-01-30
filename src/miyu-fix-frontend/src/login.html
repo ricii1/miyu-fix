@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dating App - Miyu</title>
-    <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <script type="module" src="login.js"></script>
+  </head>
 
   <div class="auth-container">
     <div class="auth-left">
       <h1 class="auth-heading">Welcome Back!</h1>
       <p class="auth-subheading">Ready to dive back into your journey?</p>
       <a href="home.html">
-      <button class="auth-btn" type="button">Login</button>
-    </a>
+        <button class="auth-btn" type="button" id="login">Login</button>
+      </a>
     </div>
     <div class="auth-right">
       <h2 class="auth-form-title">Register</h2>
@@ -23,7 +27,7 @@
           <label for="email" class="visually-hidden">Email</label>
           <div class="input-wrapper">
             <div class="icon-color">
-            <i class="fa-regular fa-envelope"></i>
+              <i class="fa-regular fa-envelope"></i>
             </div>
             <input
               type="email"
@@ -38,7 +42,7 @@
           <label for="name" class="visually-hidden">Name</label>
           <div class="input-wrapper">
             <div class="icon-color">
-            <i class="fa-regular fa-user"></i>
+              <i class="fa-regular fa-user"></i>
             </div>
             <input
               type="text"
@@ -53,7 +57,7 @@
           <label for="location" class="visually-hidden">Location</label>
           <div class="input-wrapper">
             <div class="icon-color">
-            <i class="fa-solid fa-location-dot"></i>
+              <i class="fa-solid fa-location-dot"></i>
             </div>
             <input
               type="text"
@@ -68,7 +72,7 @@
           <label for="description" class="visually-hidden">Description</label>
           <div class="input-wrapper">
             <div class="icon-color">
-                <i class="fa-regular fa-clipboard"></i>
+              <i class="fa-regular fa-clipboard"></i>
             </div>
             <input
               type="text"
@@ -79,67 +83,67 @@
             />
           </div>
         </div>
-<div class="form-group">
-    <label for="interest" class="visually-hidden">Interest</label>
-    <div class="input-wrapper">
-        <div class="icon-color">
-            <i class="fa-brands fa-gratipay"></i>
+        <div class="form-group">
+          <label for="interest" class="visually-hidden">Interest</label>
+          <div class="input-wrapper">
+            <div class="icon-color">
+              <i class="fa-brands fa-gratipay"></i>
+            </div>
+            <select id="interest" class="form-input-interest" required>
+              <option value="" disabled selected>Choose Your Interest</option>
+              <option value="Adventure">Adventure</option>
+              <option value="Animals">Animals</option>
+              <option value="Art">Art</option>
+              <option value="Astronomy">Astronomy</option>
+              <option value="Books">Books</option>
+              <option value="Business">Business</option>
+              <option value="Cars">Cars</option>
+              <option value="Comedy">Comedy</option>
+              <option value="Cooking">Cooking</option>
+              <option value="Crafts">Crafts</option>
+              <option value="Culture">Culture</option>
+              <option value="Dance">Dance</option>
+              <option value="Design">Design</option>
+              <option value="Education">Education</option>
+              <option value="Environment">Environment</option>
+              <option value="Fashion">Fashion</option>
+              <option value="Fitness">Fitness</option>
+              <option value="Food">Food</option>
+              <option value="Games">Games</option>
+              <option value="Health">Health</option>
+              <option value="Hiking">Hiking</option>
+              <option value="History">History</option>
+              <option value="Home">Home</option>
+              <option value="Humor">Humor</option>
+              <option value="Investment">Investment</option>
+              <option value="Journalism">Journalism</option>
+              <option value="Language">Language</option>
+              <option value="Lifestyle">Lifestyle</option>
+              <option value="Literature">Literature</option>
+              <option value="Music">Music</option>
+              <option value="Nature">Nature</option>
+              <option value="News">News</option>
+              <option value="Photography">Photography</option>
+              <option value="Politics">Politics</option>
+              <option value="Science">Science</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Social Media">Social Media</option>
+              <option value="Sports">Sports</option>
+              <option value="Technology">Technology</option>
+              <option value="Theater">Theater</option>
+              <option value="Travel">Travel</option>
+              <option value="Volunteering">Volunteering</option>
+              <option value="Wellness">Wellness</option>
+              <option value="Writing">Writing</option>
+              <option value="Xenology">Xenology</option>
+              <option value="Yoga">Yoga</option>
+              <option value="Zoology">Zoology</option>
+            </select>
+          </div>
         </div>
-        <select id="interest" class="form-input-interest" required>
-            <option value="" disabled selected>Choose Your Interest</option>
-            <option value="Adventure">Adventure</option>
-            <option value="Animals">Animals</option>
-            <option value="Art">Art</option>
-            <option value="Astronomy">Astronomy</option>
-            <option value="Books">Books</option>
-            <option value="Business">Business</option>
-            <option value="Cars">Cars</option>
-            <option value="Comedy">Comedy</option>
-            <option value="Cooking">Cooking</option>
-            <option value="Crafts">Crafts</option>
-            <option value="Culture">Culture</option>
-            <option value="Dance">Dance</option>
-            <option value="Design">Design</option>
-            <option value="Education">Education</option>
-            <option value="Environment">Environment</option>
-            <option value="Fashion">Fashion</option>
-            <option value="Fitness">Fitness</option>
-            <option value="Food">Food</option>
-            <option value="Games">Games</option>
-            <option value="Health">Health</option>
-            <option value="Hiking">Hiking</option>
-            <option value="History">History</option>
-            <option value="Home">Home</option>
-            <option value="Humor">Humor</option>
-            <option value="Investment">Investment</option>
-            <option value="Journalism">Journalism</option>
-            <option value="Language">Language</option>
-            <option value="Lifestyle">Lifestyle</option>
-            <option value="Literature">Literature</option>
-            <option value="Music">Music</option>
-            <option value="Nature">Nature</option>
-            <option value="News">News</option>
-            <option value="Photography">Photography</option>
-            <option value="Politics">Politics</option>
-            <option value="Science">Science</option>
-            <option value="Shopping">Shopping</option>
-            <option value="Social Media">Social Media</option>
-            <option value="Sports">Sports</option>
-            <option value="Technology">Technology</option>
-            <option value="Theater">Theater</option>
-            <option value="Travel">Travel</option>
-            <option value="Volunteering">Volunteering</option>
-            <option value="Wellness">Wellness</option>
-            <option value="Writing">Writing</option>
-            <option value="Xenology">Xenology</option>
-            <option value="Yoga">Yoga</option>
-            <option value="Zoology">Zoology</option>
-        </select>
-    </div>
-</div>
 
-        <button type="submit" class="submit-btn">Register</button>
+        <button type="submit" class="submit-btn" id="register">Register</button>
       </form>
     </div>
   </div>
-  </html>
+</html>

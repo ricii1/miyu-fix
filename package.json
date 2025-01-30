@@ -16,6 +16,7 @@
     "src/miyu-fix-frontend"
   ],
   "dependencies": {
-    "@dfinity/auth-client": "^2.2.0"
+    "@dfinity/auth-client": "^2.2.0",
+    "@dfinity/principal": "^2.2.0"
   }
 }

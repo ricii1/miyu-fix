@@ -746,6 +746,7 @@ actor Miyu{
         connections = null;
         connectionReqs = [];
         reqTo = [];
+        history = [];
     };
 
     let user2 = {
@@ -759,6 +760,7 @@ actor Miyu{
         connections = ?Principal.fromText("aaaaa-aa");
         connectionReqs = [];
         reqTo = [];
+        history = [];
     };
 
     let message1 = {
