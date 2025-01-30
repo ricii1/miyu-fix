@@ -699,4 +699,44 @@ actor Miyu{
     });
     return "Chat with user " # Principal.toText(userId) # " deleted successfully!";
   };
-};
+  
+  public shared func seedData() : async Text {
+    let user1 = {
+        id = Principal.fromText("bcogc-zszir-ch2hc-o3mwo-brkxq-mane7-wvyah-ayk7b-ykjc2-25zn4-wqe");
+        username = "Alice";
+        email = "alice@example.com";
+        location = "Jakarta";
+        description = "Tech enthusiast";
+        interests = ["Books", "Games", "Humor"];
+        photos = [];
+        connections = null;
+        connectionReqs = [];
+        reqTo = [];
+    };
+
+    let user2 = {
+        id = Principal.fromText("evcpq-wcpll-mbjag-q5lt6-zbibn-a5evp-sweht-gpxan-v7mlx-ihfhs-fae");
+        username = "Bob";
+        email = "bob@example.com";
+        location = "Jakarta";
+        description = "Loves coding";
+        interests = ["Books", "Games", "Humor"];
+        photos = [];
+        connections = ?Principal.fromText("aaaaa-aa");
+        connectionReqs = [];
+        reqTo = [];
+    };
+
+    let message1 = {
+        from = user1.id;
+        to = user2.id;
+        timestamp = Time.now();
+        content = "Hello Bob!";
+    };
+
+    users := Array.append(users, [user1, user2]);
+    chats := Array.append(chats, [message1]);
+
+    return "Data seeded successfully!";
+  }
+}

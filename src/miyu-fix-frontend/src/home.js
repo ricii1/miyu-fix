@@ -1,5 +1,28 @@
+import { AuthClient } from "@dfinity/auth-client";
+import { miyu_fix_backend } from "../../declarations/miyu-fix-backend";
+
 const settingsbutton = document.getElementById("settingsbutton");
 const sidebar = document.querySelector(".setsidebar");
+
+let authClient;
+window.addEventListener("load", async () => {
+    await initAuth();
+});
+async function initAuth(){
+    authClient = await AuthClient.create();
+    console.log("Auth client created");
+    const isAuthenticated = await authClient.isAuthenticated();
+    console.log(isAuthenticated);
+    if (!isAuthenticated) {
+        window.location.href = "src/login.html";
+    }
+}
+
+// var nearUser = miyu_fix_backend.getAllUsersWithSameLocation();
+// console.log(nearUser);
+
+// var interestUser = miyu_fix_backend.getAllUsersWithSameInterest();
+// console.log(interestUser);
 
 settingsbutton.addEventListener("click", () => {
     sidebar.classList.toggle("active");
