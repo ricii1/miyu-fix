@@ -19,17 +19,17 @@
         <aside class="sidebar">
           <div class="logo">miyu</div>
           <nav class="menu">
-            <a href="home.html" class="menu-item"><img src="./image/homeicon.png" alt="homeicon" class="homeicon">Home</a>
-            <a href="match.html" class="menu-item"><img src="./image/matchicon.png" alt="matchicon" class="matchicon">Matches</a>
-            <a href="chat.html" class="menu-item"><img src="./image/chaticon.png" alt="chaticon" class="chaticon">Chat</a>
-            <a href="profile.html" class="menu-item"><img src="./image/profileicon.png" alt="profileicon" class="profileicon">Profile</a>
+            <a href="../index.html" class="menu-item"><img src="../assets/homeicon.png" alt="homeicon" class="homeicon">Home</a>
+            <a href="match.html" class="menu-item"><img src="../assets/matchicon.png" alt="matchicon" class="matchicon">Matches</a>
+            <a href="chat.html" class="menu-item"><img src="../assets/chaticon.png" alt="chaticon" class="chaticon">Chat</a>
+            <a href="profile.html" class="menu-item"><img src="../assets/profileicon.png" alt="profileicon" class="profileicon">Profile</a>
         </nav>
         <nav class="settings">
           <button id="settingsbutton">
-            <a href="#settings" class="menu-item"><img src="./image/settingicon.png" alt="settingicon" class="settingicon">Settings</a>
+            <a href="#settings" class="menu-item"><img src="../assets/settingicon.png" alt="settingicon" class="settingicon">Settings</a>
         </button>
         <a href="login.html" class="menu-item">
-          <i class="fa-solid fa-arrow-right-from-bracket" style="color: #c20000";></i> Logout
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
       </a>
         </nav>
         </aside>
@@ -70,14 +70,14 @@
     </div>
 
     <!-- Hidden Modal with Cropper for user to select crop area -->
-    <div id="cropper-modal" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); border-radius: 10px; z-index: 9999;">
+    <div id="cropper-modal">
       <div>
-          <img id="cropper-image" src="" alt="Image to crop" style="width: 100%;">
+          <img id="cropper-image" src="" alt="Image to crop">
       </div>
       <button id="crop-button">Crop and Save</button>
     </div>
 
-    <canvas id="image-canvas" width="100" height="100" style="display: none;"></canvas>
+    <canvas id="image-canvas" class="canva"></canvas>
 
     <div class="setAP">
       <button id="close-editprof">
@@ -87,9 +87,9 @@
           <div class="cp">
               <!-- Profile Image Section -->
               <a href="#" id="change-pp">
-                  <img id="profile-img" src="./image/your_pfp.png" alt="cp" width="100" height="100" style="border-radius: 50%" />
+                  <img id="profile-img" src="../assets/your_pfp.png" alt="cp"/>
               </a>
-              <input type="file" id="image-input" accept="image/*" style="display: none;">
+              <input type="file" id="image-input" accept="image/*">
               <span>Change Photo</span>
           </div>
           <div class="cpd">
@@ -160,7 +160,7 @@
                     <button type="button" class="interest-btn" data-value="Yoga">Yoga</button>
                     <button type="button" class="interest-btn" data-value="Zoology">Zoology</button>
                 </div>
-                <p id="interest-warning" style="color: red; display: none;">You can select up to 5 interests.</p>
+                <p id="interest-warning" class="int-war">You can select up to 5 interests.</p>
                 <input type="hidden" id="selected-interests" name="selected-interests">
             </div>
               <p>Gallery<span>*</span></p>
@@ -219,7 +219,7 @@
             <div class="container">
               <div class="profile-image-section">
                 <div class="profile-image-container">
-                  <img src="./image/your_pfp.png" class="profile-photo" alt="Profile photo of Karina Blu" />
+                  <img src="../assets/your_pfp.png" class="profile-photo" alt="Profile photo of Karina Blu" />
                   <div class="description-container">
                     <div class="description-text">Description</div>
                   </div>
@@ -252,23 +252,23 @@
           <section class="cards-section">
             <div class="card-list">
               <div class="card">
-                <img src="./image/Person5.jpg" alt="Person1">
+                <img src="../assets/Person5.jpg" alt="Person1">
               </div>
               <div class="card">
-                <img src="./image/Person6.jpg" alt="Person2">
+                <img src="../assets/Person6.jpg" alt="Person2">
               </div>
               <div class="card">
-                <img src="./image/Person7.jpg" alt="Person3">
+                <img src="../assets/Person7.jpg" alt="Person3">
               </div>
               <div class="card">
-                <img src="./image/chris2.jpg" alt="Person1">
+                <img src="../assets/chris2.jpg" alt="Person1">
               </div>
             </div>
 
             <div class="card-list-v2">
               <div class="card-list">
               <div class="card">
-                <img src="./image/Person1.png" alt="Person1">
+                <img src="../assets/Person1.png" alt="Person1">
               </div>
               </div>
               </div>
