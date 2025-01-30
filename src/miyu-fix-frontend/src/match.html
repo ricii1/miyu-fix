@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dating App - Miyu</title>
-    <link rel="stylesheet" href="src/home.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="match.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-    <script defer src="src/home.js"></script>
+    <script defer src="match.js"></script>
 </head>
 <body>
     <div class="container">
@@ -25,12 +25,12 @@
             </nav>
             <nav class="settings">
                 <button id="settingsbutton">
-                    <a href="#settings" class="menu-item"><img src="./image/settingicon.png" alt="settingicon" class="settingicon">Settings</a>
-                </button>
-                <a href="login.html" class="menu-item">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
-                </a>
-            </nav>
+                  <a href="#settings" class="menu-item"><img src="./image/settingicon.png" alt="settingicon" class="settingicon">Settings</a>
+              </button>
+              <a href="login.html" class="menu-item">
+                <i class="fa-solid fa-arrow-right-from-bracket" style="color: #c20000";></i> Logout
+            </a>
+              </nav>
         </aside>
 
         <div class="setsidebar">
@@ -68,25 +68,27 @@
         </div>
 
         <!-- Hidden Modal with Cropper for user to select crop area -->
-        <div id="cropper-modal">
+        <div id="cropper-modal" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); border-radius: 10px; z-index: 9999;">
             <div>
-                <img id="cropper-image" src="" alt="Image to crop">
+                <img id="cropper-image" src="" alt="Image to crop" style="width: 100%;">
             </div>
             <button id="crop-button">Crop and Save</button>
         </div>
+
+        <canvas id="image-canvas" width="100" height="100" style="display: none;"></canvas>
 
         <div class="setAP">
             <button id="close-editprof">
                 <a href="#">x</a>
             </button>
-            <form method="POST">
+            <form action="POST">
                 <div class="cp">
                     <!-- Profile Image Section -->
                     <a href="#" id="change-pp">
-                        <img id="profile-img" src="./image/your_pfp.png" alt="cp"/>
+                        <img id="profile-img" src="./image/your_pfp.png" alt="cp" width="100" height="100" style="border-radius: 50%" />
                     </a>
-                    <input type="file" id="image-input" accept="image/*">
-                    <span>Change Photo</span>
+                    <input type="file" id="image-input" accept="image/*" style="display: none;">
+                    <span>Change Profile</span>
                 </div>
                 <div class="cpd">
                     <div class="cpdname">
@@ -156,7 +158,7 @@
                             <button type="button" class="interest-btn" data-value="Yoga">Yoga</button>
                             <button type="button" class="interest-btn" data-value="Zoology">Zoology</button>
                         </div>
-                        <p id="interest-warning" class="int-war">You can select up to 5 interests.</p>
+                        <p id="interest-warning" style="color: red; display: none;">You can select up to 5 interests.</p>
                         <input type="hidden" id="selected-interests" name="selected-interests">
                     </div>
                     <p>Gallery<span>*</span></p>
@@ -173,8 +175,6 @@
                 </div>
             </form>
         </div>
-
-        <canvas id="image-canvas" class="canva"></canvas>
 
         <div class="setnotif">
             <button id="close-notif">
@@ -214,28 +214,17 @@
         <main class="main-content">
             <header class="header">
                 <a href="#Changelocation" id="fetch-location-link">
-                    <div class="location"> <img src="./image/loc_icon.png" class="locloc" alt="instance"/>
+                    <div class="location"> <img src="./image/loc_icon.png" alt="instance" width="20" height="20"/>
                         <span id="user-location">Click To Fetch Location</span>
                     </div>
                     </a>
-
-                
-
-
                 <form>
                     <div class="search">
-                        <button id="menu-button"><img src="./image/menuicon.png" class="menu-icon" alt="menu-icon"></button>
+                        <button id="menu-button"><img src="./image/menuicon.png" class="menu-icon" alt="menu-icon" width="20" height="20"></button>
                         <input class="search-input" type="search" placeholder="Search">
                         <button id="search-button"><span class="search-icon material-symbols-outlined">search</span></button>
                     </div>
                 </form>
-
-
-
-
-
-
-
                 <div class="profile">
                     <a href="profile.html">
                     <span>Hi, (Your name)!</span>
@@ -246,56 +235,53 @@
                 </div>
             </header>
             <section class="cards-section">
-                <h2>Near You</h2>
+                <h2>Match Request</h2>
                 <div class="card-list">
-                    <a href="click-profile.html">
-                        <div class="card">
+                        <div class="card-req">
+                            <a href="click-profile.html">
                             <img src="./image/Person1.png" alt="Person1">
-                            <div class="details">(Person1), 27<br><span>Jakarta</span></div>
+                            <div class="details">(Person5), 27<br><span>Jakarta</span></div>
+                            </a>
+                                <div class="action-icons">
+                                    <div class="check"><i class="fa-regular fa-circle-check"></i></div>
+                                    <div class="xmark"><i class="fa-regular fa-circle-xmark"></i></div>
+                                </div>
                         </div>
-                    </a>
-                    <a href="click-profile.html">
-                    <div class="card">
+                    <div class="card-req">
+                        <a href="click-profile.html">
                         <img src="./image/Person2.png" alt="Person2">
-                        <div class="details">(Person2), 27<br><span>Jakarta</span></div>
+                        <div class="details">(Person6), 27<br><span>Jakarta</span></div>
+                        </a>
+                        <div class="action-icons">
+                            <div class="check"><i class="fa-regular fa-circle-check"></i></div>
+                            <div class="xmark"><i class="fa-regular fa-circle-xmark"></i></div>
+                        </div>
+                        
                     </div>
-                    </a>
-                    <a href="click-profile.html">
-                    <div class="card">
-                        <img src="./image/Person3.png" alt="Person3">
-                        <div class="details">(Person3), 27<br><span>Jakarta</span></div>
-                    </div>
-                    </a>
-                    <a href="click-profile.html">
-                    <div class="card">
-                        <img src="./image/Person4.png" alt="Person4">
-                        <div class="details">(Person4), 27<br><span>Jakarta</span></div>
-                    </div>
-                    </a>
                 </div>
-                <h2>Same Hobbies</h2>
+                <h2>Your Last Match</h2>
                 <div class="card-list">
                     <a href="click-profile.html">
                     <div class="card">
-                        <img src="./image/Person5.jpg" alt="Person5">
+                        <img src="./image/Person1.png" alt="Person5">
                         <div class="details">(Person5), 27<br><span>Jakarta</span></div>
                     </div>
                     </a>
                     <a href="click-profile.html">
                     <div class="card">
-                        <img src="./image/Person6.jpg" alt="Person6">
+                        <img src="./image/Person2.png" alt="Person6">
                         <div class="details">(Person6), 27<br><span>Jakarta</span></div>
                     </div>
                     </a>
                     <a href="click-profile.html">
                     <div class="card">
-                        <img src="./image/Person7.jpg" alt="Person7">
+                        <img src="./image/Person3.png" alt="Person7">
                         <div class="details">(Person7), 27<br><span>Jakarta</span></div>
                     </div>
                     </a>
                     <a href="click-profile.html">
                     <div class="card">
-                        <img src="./image/Person8.webp" alt="Person8">
+                        <img src="./image/Person4.png" alt="Person8">
                         <div class="details">(Person8), 27<br><span>Jakarta</span></div>
                     </div>
                     </a>

@@ -1,0 +1,19 @@
+{
+  "name": "miyu-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@dfinity/agent": "^2.2.0",
+    "@dfinity/auth-client": "^2.2.0",
+    "@dfinity/candid": "^2.2.0",
+    "@dfinity/identity": "^2.2.0",
+    "@dfinity/principal": "^2.2.0",
+    "@dfinity/utils": "^2.9.0"
+  }
+}
