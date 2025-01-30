@@ -16,6 +16,7 @@ actor Miyu{
     connections : ?Principal;
     connectionReqs : [Principal];
     reqTo : [Principal];
+    history : [Principal];
   };
   
   stable var users : [User] = [];
@@ -42,6 +43,7 @@ actor Miyu{
         connections = null;
         connectionReqs = [];
         reqTo = [];
+        history = [];
       };
       return ("User not found!", user);
     };
@@ -58,6 +60,7 @@ actor Miyu{
           connections = null;
           connectionReqs = [];
           reqTo = [];
+          history = [];
         };
         return ("User not found!", user);
       };
@@ -93,6 +96,7 @@ actor Miyu{
       connections = null;    // Tidak ada koneksi awal
       connectionReqs = []; // Tidak ada koneksi awal
       reqTo = [];
+      history = [];
     };
 
     users := Array.append(users, [newUser]);
@@ -147,6 +151,7 @@ actor Miyu{
               connections = user.connections;
               connectionReqs = user.connectionReqs;
               reqTo = user.reqTo;
+              history = user.history;
             };
           } else {
             return user;
@@ -174,6 +179,7 @@ actor Miyu{
       connections = null;    // Tidak ada koneksi awal
       connectionReqs = []; // Tidak ada koneksi awal
       reqTo = [];
+      history = [];
     };
 
     users := Array.append(users, [newUser]);
@@ -198,6 +204,7 @@ actor Miyu{
     };
     return false;
   };
+
 
   public shared(msg) func sendConnReq(to : Principal) : async Text  {
     let from = msg.caller;
@@ -229,6 +236,7 @@ actor Miyu{
           connections = user.connections;
           connectionReqs = Array.append(user.connectionReqs, [from]);
           reqTo = user.reqTo;
+          history = user.history;
         };
       } else if (user.id == from) {
         return {
@@ -242,6 +250,7 @@ actor Miyu{
           connections = user.connections;
           connectionReqs = user.connectionReqs;
           reqTo = Array.append(user.reqTo, [to]);
+          history = user.history;
         };
       } else {
         return user;
@@ -290,6 +299,7 @@ actor Miyu{
           connections = ?from;
           connectionReqs = [];
           reqTo = [];
+          history = user.history;
         };
       } else if (user.id == from) {
         return {
@@ -303,6 +313,7 @@ actor Miyu{
           connections = ?to;
           connectionReqs = [];
           reqTo = [];
+          history = user.history;
         };
       } else {
         return user;
@@ -351,6 +362,7 @@ actor Miyu{
                     req != from;
                 });
           reqTo = user.reqTo;
+          history = user.history;
         };
       } else if (user.id == from) {
         return {
@@ -364,6 +376,7 @@ actor Miyu{
           connections = user.connections;
           connectionReqs = user.connectionReqs;
           reqTo = [];
+          history = user.history;
         };
       } 
       else {
@@ -419,6 +432,7 @@ actor Miyu{
               connections = user.connections;
               connectionReqs = user.connectionReqs;
               reqTo = user.reqTo;
+              history = user.history;
             };
           } else {
             return user;
@@ -460,6 +474,7 @@ actor Miyu{
               connections = user.connections;
               connectionReqs = user.connectionReqs;
               reqTo = user.reqTo;
+              history = user.history;
             };
           } else {
             return user;
@@ -497,6 +512,7 @@ actor Miyu{
               connections = user.connections;
               connectionReqs = user.connectionReqs;
               reqTo = user.reqTo;
+              history = user.history;
             };
           } else {
             return user;
@@ -548,6 +564,7 @@ actor Miyu{
               connections = user.connections;
               connectionReqs = user.connectionReqs;
               reqTo = user.reqTo;
+              history = user.history;
             };
           } else {
             return user;
@@ -649,7 +666,8 @@ actor Miyu{
     };
 
     users := Array.map<User, User>(users, func(user: User): User {
-        if (user.id == usera or user.id == userb) {
+      
+        if (user.id == usera) {
             return {
                 id = user.id;
                 username = user.username;
@@ -661,8 +679,24 @@ actor Miyu{
                 connections = null;
                 connectionReqs = [];
                 reqTo = [];
+                history = Array.append(user.history, [userb]);
             };
-        } else {
+        } else if (user.id == userb) {
+            return {
+                id = user.id;
+                username = user.username;
+                location = user.location;
+                description = user.description;
+                interests = user.interests;
+                email = user.email;
+                photos = user.photos;
+                connections = null;
+                connectionReqs = [];
+                reqTo = [];
+                history = Array.append(user.history, [usera]);
+            };
+        } 
+        else {
             return user;
         }
     });
@@ -699,4 +733,5 @@ actor Miyu{
     });
     return "Chat with user " # Principal.toText(userId) # " deleted successfully!";
   };
+
 };
