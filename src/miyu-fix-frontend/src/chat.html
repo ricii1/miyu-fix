@@ -18,17 +18,17 @@
         <aside class="sidebar">
             <div class="logo">miyu</div>
             <nav class="menu">
-                <a href="home.html" class="menu-item"><img src="./image/homeicon.png" alt="homeicon" class="homeicon"></a>
-                <a href="match.html" class="menu-item"><img src="./image/matchicon.png" alt="matchicon" class="matchicon"></a>
-                <a href="chat.html" class="menu-item"><img src="./image/chaticon.png" alt="chaticon" class="chaticon"></a>
-                <a href="profile.html" class="menu-item"><img src="./image/profileicon.png" alt="profileicon" class="profileicon"></a>
+                <a href="../index.html" class="menu-item"><img src="../assets/homeicon.png" alt="homeicon" class="homeicon"></a>
+                <a href="match.html" class="menu-item"><img src="../assets/matchicon.png" alt="matchicon" class="matchicon"></a>
+                <a href="chat.html" class="menu-item"><img src="../assets/chaticon.png" alt="chaticon" class="chaticon"></a>
+                <a href="profile.html" class="menu-item"><img src="../assets/profileicon.png" alt="profileicon" class="profileicon"></a>
             </nav>
             <nav class="settings">
                 <button id="settingsbutton">
-                  <a href="#settings" class="menu-item"><img src="./image/settingicon.png" alt="settingicon" class="settingicon"></a>
+                  <a href="#settings" class="menu-item"><img src="../assets/settingicon.png" alt="settingicon" class="settingicon"></a>
               </button>
                 <a href="login.html" class="menu-item">
-                    <i class="fa-solid fa-arrow-right-from-bracket" style="color: #c20000";></i>
+                    <i class="fa-solid fa-arrow-right-from-bracket";></i>
                 </a>
               </nav>
         </aside>
@@ -68,14 +68,14 @@
         </div>
 
         <!-- Hidden Modal with Cropper for user to select crop area -->
-        <div id="cropper-modal" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); border-radius: 10px; z-index: 9999;">
+        <div id="cropper-modal" class="crop-save">
             <div>
-                <img id="cropper-image" src="" alt="Image to crop" style="width: 100%;">
+                <img id="cropper-image" src="" alt="Image to crop">
             </div>
             <button id="crop-button">Crop and Save</button>
         </div>
 
-        <canvas id="image-canvas" width="100" height="100" style="display: none;"></canvas>
+        <canvas id="image-canvas" class="for-canvas"></canvas>
 
         <div class="setAP">
             <button id="close-editprof">
@@ -85,9 +85,9 @@
                 <div class="cp">
                     <!-- Profile Image Section -->
                     <a href="#" id="change-pp">
-                        <img id="profile-img" src="./image/your_pfp.png" alt="cp" width="100" height="100" style="border-radius: 50%" />
+                        <img id="profile-img" src="../assets/your_pfp.png" alt="cp" class="for-pfp" />
                     </a>
-                    <input type="file" id="image-input" accept="image/*" style="display: none;">
+                    <input type="file" id="image-input" accept="image/*">
                     <span>Change Profile</span>
                 </div>
                 <div class="cpd">
@@ -158,7 +158,7 @@
                             <button type="button" class="interest-btn" data-value="Yoga">Yoga</button>
                             <button type="button" class="interest-btn" data-value="Zoology">Zoology</button>
                         </div>
-                        <p id="interest-warning" style="color: red; display: none;">You can select up to 5 interests.</p>
+                        <p id="interest-warning" class="interest-warn">You can select up to 5 interests.</p>
                         <input type="hidden" id="selected-interests" name="selected-interests">
                     </div>
                     <p>Gallery<span>*</span></p>
@@ -219,7 +219,7 @@
     
                 <form>
                     <div class="search">
-                        <button id="menu-button"><img src="./image/menuicon.png" class="menu-icon" alt="menu-icon" width="20" height="20"></button>
+                        <button id="menu-button"><img src="../assets/menuicon.png" class="menu-icon" alt="menu-icon" width="20" height="20"></button>
                         <input class="search-input" type="search" placeholder="Search">
                         <button id="search-button"><span class="search-icon material-symbols-outlined">search</span></button>
                     </div>
@@ -230,7 +230,7 @@
             <div class="contact-list">
                 <button id="chat1">
                     <div class="message-card">
-                        <div class="cl-profile"><img src="./image/Person1.png" alt="p1"></div>
+                        <div class="cl-profile"><img src="../assets/Person1.png" alt="p1"></div>
 
                         <div class="column">
                             <div class="cl-name">Park Jongseong</div>
@@ -245,7 +245,7 @@
 
                 <button id="chat2">
                 <div class="message-card">
-                    <div class="cl-profile"><img src="./image/Person2.png" alt="p1"></div>
+                    <div class="cl-profile"><img src="../assets/Person2.png" alt="p1"></div>
 
                     <div class="column">
                         <div class="cl-name">Jake</div>
@@ -259,7 +259,7 @@
                 </button>
                 <button id="chat3">
                 <div class="message-card">
-                    <div class="cl-profile"><img src="./image/Person3.png" alt="p1"></div>
+                    <div class="cl-profile"><img src="../assets/Person3.png" alt="p1"></div>
 
                     <div class="column">
                         <div class="cl-name">Niki</div>
@@ -273,7 +273,7 @@
             </button>
             <button id="chat4">
                 <div class="message-card">
-                    <div class="cl-profile"><img src="./image/Person4.png" alt="p1"></div>
+                    <div class="cl-profile"><img src="../assets/Person4.png" alt="p1"></div>
 
                     <div class="column">
                         <div class="cl-name">Mark</div>
@@ -287,7 +287,7 @@
             </button>
             <button id="chat5">
                 <div class="message-card">
-                    <div class="cl-profile"><img src="./image/Person5.jpg" alt="p1"></div>
+                    <div class="cl-profile"><img src="../assets/Person5.jpg" alt="p1"></div>
 
                     <div class="column">
                         <div class="cl-name">Choi Hyunwook</div>
@@ -301,7 +301,7 @@
             </button>
             <button id="chat6">
                 <div class="message-card">
-                    <div class="cl-profile"><img src="./image/Person6.jpg" alt="p1"></div>
+                    <div class="cl-profile"><img src="../assets/Person6.jpg" alt="p1"></div>
 
                     <div class="column">
                         <div class="cl-name">Si Jamet</div>
@@ -315,7 +315,7 @@
             </button>
             <button id="chat7">
                 <div class="message-card">
-                    <div class="cl-profile"><img src="./image/Person7.jpg" alt="p1"></div>
+                    <div class="cl-profile"><img src="../assets/Person7.jpg" alt="p1"></div>
 
                     <div class="column">
                         <div class="cl-name">Richardo</div>
@@ -329,7 +329,7 @@
             </button>
             <button id="chat8">
                 <div class="message-card-read">
-                    <div class="cl-profile"><img src="./image/Person8.webp" alt="p1"></div>
+                    <div class="cl-profile"><img src="../assets/Person8.webp" alt="p1"></div>
 
                     <div class="column">
                         <div class="cl-name">Mickey Will</div>
@@ -348,10 +348,10 @@
 
 
         <main class="main-content">
-            <div class="personchat" data-chat="chat1" style="display: none">
+            <div class="personchat" data-chat="chat1" class="chatperson">
                 <header class="header">
                     <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="./image/Person1.png" alt="p1"></div></a>
+                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person1.png" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Park Jongseong</div>
                             <div class="cl-sent-time">Offline, 20 mins ago</div>
@@ -396,9 +396,9 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="./image/camicon.png" width="30" height="29" style="cursor: pointer;">
+                            <img src="../assets/camicon.png" class="image-chat">
                         </label>
-                        <input id="cam" type="file" accept="image/*" style="display: none;">
+                        <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
                         <div class="submit">
                             <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
@@ -407,10 +407,10 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat2" style="display: none">
+            <div class="personchat" data-chat="chat2" class="chatperson">
                 <header class="header">
                     <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="./image/Person2.png" alt="p1"></div></a>
+                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person2.png" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Jake</div>
                             <div class="cl-sent-time">Online</div>
@@ -434,9 +434,9 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="./image/camicon.png" width="30" height="29" style="cursor: pointer;">
+                            <img src="../assets/camicon.png" class="image-chat">
                         </label>
-                        <input id="cam" type="file" accept="image/*" style="display: none;">
+                        <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
                         <div class="submit">
                             <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
@@ -445,10 +445,10 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat3" style="display: none">
+            <div class="personchat" data-chat="chat3" class="chatperson">
                 <header class="header">
                     <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="./image/Person3.png" alt="p1"></div></a>
+                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person3.png" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Niki</div>
                             <div class="cl-sent-time">Offline, 5 hours ago</div>
@@ -472,9 +472,9 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="./image/camicon.png" width="30" height="29" style="cursor: pointer;">
+                            <img src="../assets/camicon.png" class="image-chat">
                         </label>
-                        <input id="cam" type="file" accept="image/*" style="display: none;">
+                        <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
                         <div class="submit">
                             <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
@@ -483,10 +483,10 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat4" style="display: none">
+            <div class="personchat" data-chat="chat4" class="chatperson">
                 <header class="header">
                     <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="./image/Person4.png" alt="p1"></div></a>
+                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person4.png" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Mark</div>
                             <div class="cl-sent-time">Offline, yesterday</div>
@@ -507,9 +507,9 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="./image/camicon.png" width="30" height="29" style="cursor: pointer;">
+                            <img src="../assets/camicon.png" class="image-chat">
                         </label>
-                        <input id="cam" type="file" accept="image/*" style="display: none;">
+                        <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
                         <div class="submit">
                             <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
@@ -518,10 +518,10 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat5" style="display: none">
+            <div class="personchat" data-chat="chat5" class="chatperson">
                 <header class="header">
                     <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="./image/Person5.jpg" alt="p1"></div></a>
+                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person5.jpg" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Choi Hyunwook</div>
                             <div class="cl-sent-time">Online</div>
@@ -547,9 +547,9 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="./image/camicon.png" width="30" height="29" style="cursor: pointer;">
+                            <img src="../assets/camicon.png" class="image-chat">
                         </label>
-                        <input id="cam" type="file" accept="image/*" style="display: none;">
+                        <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
                         <div class="submit">
                             <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
@@ -558,10 +558,10 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat6" style="display: none">
+            <div class="personchat" data-chat="chat6" class="chatperson">
                 <header class="header">
                     <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="./image/Person6.jpg" alt="p1"></div></a>
+                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person6.jpg" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Si Jamet</div>
                             <div class="cl-sent-time">Offline, yesterday</div>
@@ -590,9 +590,9 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="./image/camicon.png" width="30" height="29" style="cursor: pointer;">
+                            <img src="../assets/camicon.png" class="image-chat">
                         </label>
-                        <input id="cam" type="file" accept="image/*" style="display: none;">
+                        <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
                         <div class="submit">
                             <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
@@ -601,10 +601,10 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat7" style="display: none">
+            <div class="personchat" data-chat="chat7" class="chatperson">
                 <header class="header">
                     <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="./image/Person7.jpg" alt="p1"></div></a>
+                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person7.jpg" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Richardo</div>
                             <div class="cl-sent-time">Offline, 3 days ago</div>
@@ -627,9 +627,9 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="./image/camicon.png" width="30" height="29" style="cursor: pointer;">
+                            <img src="../assets/camicon.png" class="image-chat">
                         </label>
-                        <input id="cam" type="file" accept="image/*" style="display: none;">
+                        <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
                         <div class="submit">
                             <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
@@ -638,10 +638,10 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat8" style="display: none">
+            <div class="personchat" data-chat="chat8" class="chatperson">
                 <header class="header">
                     <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="./image/Person8.webp" alt="p1"></div></a>
+                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person8.webp" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Mickey will</div>
                             <div class="cl-sent-time">Offline, yesterday</div>
@@ -667,9 +667,9 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="./image/camicon.png" width="30" height="29" style="cursor: pointer;">
+                            <img src="../assets/camicon.png" class="image-chat">
                         </label>
-                        <input id="cam" type="file" accept="image/*" style="display: none;">
+                        <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
                         <div class="submit">
                             <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>

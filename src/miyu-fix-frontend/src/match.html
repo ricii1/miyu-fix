@@ -18,17 +18,17 @@
         <aside class="sidebar">
             <div class="logo">miyu</div>
             <nav class="menu">
-                <a href="home.html" class="menu-item"><img src="./image/homeicon.png" alt="homeicon" class="homeicon">Home</a>
-                <a href="match.html" class="menu-item"><img src="./image/matchicon.png" alt="matchicon" class="matchicon">Matches</a>
-                <a href="chat.html" class="menu-item"><img src="./image/chaticon.png" alt="chaticon" class="chaticon">Chat</a>
-                <a href="profile.html" class="menu-item"><img src="./image/profileicon.png" alt="profileicon" class="profileicon">Profile</a>
+                <a href="../index.html" class="menu-item"><img src="../assets/homeicon.png" alt="homeicon" class="homeicon">Home</a>
+                <a href="match.html" class="menu-item"><img src="../assets/matchicon.png" alt="matchicon" class="matchicon">Matches</a>
+                <a href="chat.html" class="menu-item"><img src="../assets/chaticon.png" alt="chaticon" class="chaticon">Chat</a>
+                <a href="profile.html" class="menu-item"><img src="../assets/profileicon.png" alt="profileicon" class="profileicon">Profile</a>
             </nav>
             <nav class="settings">
                 <button id="settingsbutton">
-                  <a href="#settings" class="menu-item"><img src="./image/settingicon.png" alt="settingicon" class="settingicon">Settings</a>
+                  <a href="#settings" class="menu-item"><img src="../assets/settingicon.png" alt="settingicon" class="settingicon">Settings</a>
               </button>
               <a href="login.html" class="menu-item">
-                <i class="fa-solid fa-arrow-right-from-bracket" style="color: #c20000";></i> Logout
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
             </a>
               </nav>
         </aside>
@@ -68,14 +68,14 @@
         </div>
 
         <!-- Hidden Modal with Cropper for user to select crop area -->
-        <div id="cropper-modal" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); border-radius: 10px; z-index: 9999;">
+        <div id="cropper-modal">
             <div>
-                <img id="cropper-image" src="" alt="Image to crop" style="width: 100%;">
+                <img id="cropper-image" src="" alt="Image to crop">
             </div>
             <button id="crop-button">Crop and Save</button>
         </div>
 
-        <canvas id="image-canvas" width="100" height="100" style="display: none;"></canvas>
+        <canvas id="image-canvas" class="canva"></canvas>
 
         <div class="setAP">
             <button id="close-editprof">
@@ -85,9 +85,9 @@
                 <div class="cp">
                     <!-- Profile Image Section -->
                     <a href="#" id="change-pp">
-                        <img id="profile-img" src="./image/your_pfp.png" alt="cp" width="100" height="100" style="border-radius: 50%" />
+                        <img id="profile-img" src="../assets/your_pfp.png" alt="cp"/>
                     </a>
-                    <input type="file" id="image-input" accept="image/*" style="display: none;">
+                    <input type="file" id="image-input" accept="image/*">
                     <span>Change Profile</span>
                 </div>
                 <div class="cpd">
@@ -158,7 +158,7 @@
                             <button type="button" class="interest-btn" data-value="Yoga">Yoga</button>
                             <button type="button" class="interest-btn" data-value="Zoology">Zoology</button>
                         </div>
-                        <p id="interest-warning" style="color: red; display: none;">You can select up to 5 interests.</p>
+                        <p id="interest-warning" class="int-war">You can select up to 5 interests.</p>
                         <input type="hidden" id="selected-interests" name="selected-interests">
                     </div>
                     <p>Gallery<span>*</span></p>
@@ -214,13 +214,13 @@
         <main class="main-content">
             <header class="header">
                 <a href="#Changelocation" id="fetch-location-link">
-                    <div class="location"> <img src="./image/loc_icon.png" alt="instance" width="20" height="20"/>
+                    <div class="location"> <img src="../assets/loc_icon.png" alt="instance"  class="locloc"/>
                         <span id="user-location">Click To Fetch Location</span>
                     </div>
                     </a>
                 <form>
                     <div class="search">
-                        <button id="menu-button"><img src="./image/menuicon.png" class="menu-icon" alt="menu-icon" width="20" height="20"></button>
+                        <button id="menu-button"><img src="../assets/menuicon.png" class="menu-icon" alt="menu-icon"></button>
                         <input class="search-input" type="search" placeholder="Search">
                         <button id="search-button"><span class="search-icon material-symbols-outlined">search</span></button>
                     </div>
@@ -230,7 +230,7 @@
                     <span>Hi, (Your name)!</span>
                     </a>
                     <a href="profile.html">
-                        <img src="./image/your_pfp.png" alt="Profile Picture" class="profile-pic">
+                        <img src="../assets/your_pfp.png" alt="Profile Picture" class="profile-pic">
                     </a>
                 </div>
             </header>
@@ -239,7 +239,7 @@
                 <div class="card-list">
                         <div class="card-req">
                             <a href="click-profile.html">
-                            <img src="./image/Person1.png" alt="Person1">
+                            <img src="../assets/Person1.png" alt="Person1">
                             <div class="details">(Person5), 27<br><span>Jakarta</span></div>
                             </a>
                                 <div class="action-icons">
@@ -249,7 +249,7 @@
                         </div>
                     <div class="card-req">
                         <a href="click-profile.html">
-                        <img src="./image/Person2.png" alt="Person2">
+                        <img src="../assets/Person2.png" alt="Person2">
                         <div class="details">(Person6), 27<br><span>Jakarta</span></div>
                         </a>
                         <div class="action-icons">
@@ -263,25 +263,25 @@
                 <div class="card-list">
                     <a href="click-profile.html">
                     <div class="card">
-                        <img src="./image/Person1.png" alt="Person5">
+                        <img src="../assets/Person1.png" alt="Person5">
                         <div class="details">(Person5), 27<br><span>Jakarta</span></div>
                     </div>
                     </a>
                     <a href="click-profile.html">
                     <div class="card">
-                        <img src="./image/Person2.png" alt="Person6">
+                        <img src="../assets/Person2.png" alt="Person6">
                         <div class="details">(Person6), 27<br><span>Jakarta</span></div>
                     </div>
                     </a>
                     <a href="click-profile.html">
                     <div class="card">
-                        <img src="./image/Person3.png" alt="Person7">
+                        <img src="../assets/Person3.png" alt="Person7">
                         <div class="details">(Person7), 27<br><span>Jakarta</span></div>
                     </div>
                     </a>
                     <a href="click-profile.html">
                     <div class="card">
-                        <img src="./image/Person4.png" alt="Person8">
+                        <img src="../assets/Person4.png" alt="Person8">
                         <div class="details">(Person8), 27<br><span>Jakarta</span></div>
                     </div>
                     </a>

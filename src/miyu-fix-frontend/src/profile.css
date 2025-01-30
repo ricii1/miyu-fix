@@ -687,3 +687,70 @@ a {
     border-radius: 20px;
     box-shadow: 0 7px 11px rgba(0, 0, 0, 0.5);
 }
+
+
+
+
+.fa-solid {
+  color: #c20000;
+}
+
+#cropper-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  z-index: 9999;
+  text-align: center;
+}
+
+#cropper-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+#crop-button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#crop-button:hover {
+  background: #0056b3;
+}
+
+#profile-img {
+  width: 100px; 
+  height: 100px;
+  border-radius: 50%
+} 
+
+.cp input {
+ display: none;
+}
+
+.int-war {
+  color: red;
+  display: none;
+} 
+
+.canva {
+  width: 100px;
+  height: 100px;
+  display: none;
+} 
+
+.menu-icon {
+  width: 20px;
+  height: 20px;
+} 
