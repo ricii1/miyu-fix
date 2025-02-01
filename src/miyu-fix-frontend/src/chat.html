@@ -30,7 +30,7 @@
                 <a href="login.html" class="menu-item">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 </a>
-            </nav>
+              </nav>
         </aside>
 
         <div class="setsidebar">
@@ -68,14 +68,14 @@
         </div>
 
         <!-- Hidden Modal with Cropper for user to select crop area -->
-        <div id="cropper-modal" class="crop-save">
+        <div id="cropper-modal">
             <div>
                 <img id="cropper-image" src="" alt="Image to crop">
             </div>
             <button id="crop-button">Crop and Save</button>
         </div>
 
-        <canvas id="image-canvas" class="for-canvas"></canvas>
+        <canvas id="image-canvas" class="canva"></canvas>
 
         <div class="setAP">
             <button id="close-editprof">
@@ -85,7 +85,7 @@
                 <div class="cp">
                     <!-- Profile Image Section -->
                     <a href="#" id="change-pp">
-                        <img id="profile-img" src="../assets/your_pfp.png" alt="cp" class="for-pfp" />
+                        <img id="profile-img" src="../assets/your_pfp.png" alt="cp" />
                     </a>
                     <input type="file" id="image-input" accept="image/*">
                     <span>Change Profile</span>
@@ -158,7 +158,7 @@
                             <button type="button" class="interest-btn" data-value="Yoga">Yoga</button>
                             <button type="button" class="interest-btn" data-value="Zoology">Zoology</button>
                         </div>
-                        <p id="interest-warning" class="interest-warn">You can select up to 5 interests.</p>
+                        <p id="interest-warning" class="int-war">You can select up to 5 interests.</p>
                         <input type="hidden" id="selected-interests" name="selected-interests">
                     </div>
                     <p>Gallery<span>*</span></p>
@@ -219,7 +219,7 @@
     
                 <form>
                     <div class="search">
-                        <button id="menu-button"><img src="../assets/menuicon.png" class="menu-icon" alt="menu-icon" width="20" height="20"></button>
+                        <button id="menu-button"><img src="../assets/menuicon.png" class="menu-icon" alt="menu-icon"></button>
                         <input class="search-input" type="search" placeholder="Search">
                         <button id="search-button"><span class="search-icon material-symbols-outlined">search</span></button>
                     </div>
@@ -237,7 +237,6 @@
                             <div class="cl-text">Wait, gtg</div>
                         </div>
                         <div class="column-right">
-                            <div class="cl-sent-time">20 mins ago</div>
                             <div class="cl-notif">19</div>
                         </div>
                     </div>
@@ -252,7 +251,6 @@
                         <div class="cl-text">How's ur week...</div>
                     </div>
                     <div class="column-right">
-                        <div class="cl-sent-time">2 hours ago</div>
                         <div class="cl-notif">2</div>
                     </div>
                 </div>
@@ -266,7 +264,6 @@
                         <div class="cl-text">My name is Niki, what are...</div>
                     </div>
                     <div class="column-right">
-                        <div class="cl-sent-time">yesterday</div>
                         <div class="cl-notif">2</div>
                     </div>
                 </div>
@@ -280,7 +277,6 @@
                         <div class="cl-text">Would you mind to...</div>
                     </div>
                     <div class="column-right">
-                        <div class="cl-sent-time">yesterday</div>
                         <div class="cl-notif">4</div>
                     </div>
                 </div>
@@ -294,7 +290,6 @@
                         <div class="cl-text">Let's go dinner at...</div>
                     </div>
                     <div class="column-right">
-                        <div class="cl-sent-time">2 days ago</div>
                         <div class="cl-notif">2</div>
                     </div>
                 </div>
@@ -308,7 +303,6 @@
                         <div class="cl-text">Anjay</div>
                     </div>
                     <div class="column-right">
-                        <div class="cl-sent-time">2 days ago</div>
                         <div class="cl-notif">6</div>
                     </div>
                 </div>
@@ -322,7 +316,6 @@
                         <div class="cl-text">I'm busy right now, chat...</div>
                     </div>
                     <div class="column-right">
-                        <div class="cl-sent-time">a week ago</div>
                         <div class="cl-notif">1</div>
                     </div>
                 </div>
@@ -336,7 +329,6 @@
                         <div class="cl-text">I'm sorry, I've no interest on...</div>
                     </div>
                     <div class="column-right">
-                        <div class="cl-sent-time">3 weeks ago</div>
                     </div>
                 </div>
             </button>
@@ -348,13 +340,12 @@
 
 
         <main class="main-content">
-            <div class="personchat" data-chat="chat1" class="chatperson">
+            <div class="personchat" data-chat="chat1">
                 <header class="header">
                     <div class="from">
                         <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person1.png" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Park Jongseong</div>
-                            <div class="cl-sent-time">Offline, 20 mins ago</div>
                         </div>
                     </div>
                 </header>
@@ -396,7 +387,7 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="../assets/camicon.png" class="image-chat">
+                            <img src="../assets/camicon.png" class="typing-label">
                         </label>
                         <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
@@ -407,13 +398,12 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat2" class="chatperson">
+            <div class="personchat" data-chat="chat2">
                 <header class="header">
                     <div class="from">
                         <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person2.png" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Jake</div>
-                            <div class="cl-sent-time">Online</div>
                         </div>
                     </div>
                 </header>
@@ -434,7 +424,7 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="../assets/camicon.png" class="image-chat">
+                            <img src="../assets/camicon.png" class="typing-label">
                         </label>
                         <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
@@ -445,13 +435,12 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat3" class="chatperson">
+            <div class="personchat" data-chat="chat3">
                 <header class="header">
                     <div class="from">
                         <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person3.png" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Niki</div>
-                            <div class="cl-sent-time">Offline, 5 hours ago</div>
                         </div>
                     </div>
                 </header>
@@ -472,7 +461,7 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="../assets/camicon.png" class="image-chat">
+                            <img src="../assets/camicon.png" class="typing-label">
                         </label>
                         <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
@@ -483,13 +472,12 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat4" class="chatperson">
+            <div class="personchat" data-chat="chat4">
                 <header class="header">
                     <div class="from">
                         <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person4.png" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Mark</div>
-                            <div class="cl-sent-time">Offline, yesterday</div>
                         </div>
                     </div>
                 </header>
@@ -507,7 +495,7 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="../assets/camicon.png" class="image-chat">
+                            <img src="../assets/camicon.png" class="typing-label">
                         </label>
                         <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
@@ -518,13 +506,12 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat5" class="chatperson">
+            <div class="personchat" data-chat="chat5">
                 <header class="header">
                     <div class="from">
                         <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person5.jpg" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Choi Hyunwook</div>
-                            <div class="cl-sent-time">Online</div>
                         </div>
                     </div>
                 </header>
@@ -547,7 +534,7 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="../assets/camicon.png" class="image-chat">
+                            <img src="../assets/camicon.png" class="typing-label">
                         </label>
                         <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
@@ -558,13 +545,12 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat6" class="chatperson">
+            <div class="personchat" data-chat="chat6">
                 <header class="header">
                     <div class="from">
                         <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person6.jpg" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Si Jamet</div>
-                            <div class="cl-sent-time">Offline, yesterday</div>
                         </div>
                     </div>
                 </header>
@@ -590,7 +576,7 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="../assets/camicon.png" class="image-chat">
+                            <img src="../assets/camicon.png" class="typing-label">
                         </label>
                         <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
@@ -601,13 +587,12 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat7" class="chatperson">
+            <div class="personchat" data-chat="chat7">
                 <header class="header">
                     <div class="from">
                         <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person7.jpg" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Richardo</div>
-                            <div class="cl-sent-time">Offline, 3 days ago</div>
                         </div>
                     </div>
                 </header>
@@ -627,7 +612,7 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="../assets/camicon.png" class="image-chat">
+                            <img src="../assets/camicon.png" class="typing-label">
                         </label>
                         <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
@@ -638,13 +623,12 @@
                 </form>
             </div>
 
-            <div class="personchat" data-chat="chat8" class="chatperson">
+            <div class="personchat" data-chat="chat8">
                 <header class="header">
                     <div class="from">
                         <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person8.webp" alt="p1"></div></a>
                         <div class="column">
                             <div class="cl-name">Mickey will</div>
-                            <div class="cl-sent-time">Offline, yesterday</div>
                         </div>
                     </div>
                 </header>
@@ -667,7 +651,7 @@
                 <form>
                     <div class="typing">
                         <label for="cam">
-                            <img src="../assets/camicon.png" class="image-chat">
+                            <img src="../assets/camicon.png" class="typing-label">
                         </label>
                         <input id="cam" type="file" accept="image/*">
                         <input class="text" id="filename" type="text" placeholder="Type message here...">
