@@ -1,28 +1,29 @@
-import { AuthClient } from "@dfinity/auth-client";
 import { miyu_fix_backend } from "../../declarations/miyu-fix-backend";
+import Swal from 'sweetalert2'
 
 const settingsbutton = document.getElementById("settingsbutton");
 const sidebar = document.querySelector(".setsidebar");
 
-let authClient;
 window.addEventListener("load", async () => {
-    await initAuth();
-});
-async function initAuth(){
-    authClient = await AuthClient.create();
-    console.log("Auth client created");
-    const isAuthenticated = await authClient.isAuthenticated();
-    console.log(isAuthenticated);
-    if (!isAuthenticated) {
-        window.location.href = "src/login.html";
+    const isLoggedIn = await miyu_fix_backend.login();
+    if(isLoggedIn == "User not found!"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'User not found! You must register first!',
+            willClose: () => {
+                window.location.href = "src/login.html";
+            }
+        })
     }
-}
+    const getMe = await miyu_fix_backend.getMe();
+    document.querySelector("#username-profile").textContent = getMe[1].username;
+    const userInterest = getMe[1].interests[0];
+    const userLocation = getMe[1].location;
+    console.log(await miyu_fix_backend.getAllUsersWithSameInterest(userInterest));
+    console.log(await miyu_fix_backend.getAllUsersWithSameLocation(userLocation));
 
-// var nearUser = miyu_fix_backend.getAllUsersWithSameLocation();
-// console.log(nearUser);
-
-// var interestUser = miyu_fix_backend.getAllUsersWithSameInterest();
-// console.log(interestUser);
+});
 
 settingsbutton.addEventListener("click", () => {
     sidebar.classList.toggle("active");

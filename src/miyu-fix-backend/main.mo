@@ -10,6 +10,7 @@ actor Miyu{
     username : Text;
     email : Text;
     location : Text;
+    age : Nat;
     description : Text;
     interests : [Text];
     photos : [Blob];
@@ -29,7 +30,10 @@ actor Miyu{
   };
 
   stable var chats : [Message] = [];
-
+  public func resetUsers() : async Text {
+    users := [];
+    return "Users reset successfully!";
+  };
   public query(msg) func getMe() : async (Text, User) { //kembaliin data + update data if need
     if(not checkUserExist(msg.caller)){
       let user : User = {
@@ -37,6 +41,7 @@ actor Miyu{
         username = "";
         email = "";
         location = "";
+        age = 0;
         description = "";
         interests = [];
         photos = [];
@@ -53,6 +58,7 @@ actor Miyu{
           id = msg.caller;
           username = "";
           email = "";
+          age = 0;
           location = "";
           description = "";
           interests = [];
@@ -78,7 +84,7 @@ actor Miyu{
     let existingUser = Array.find<User>(users, func (user: User) : Bool { user.id == userId });
     return existingUser != null;
   };
-  public shared(msg) func createAccount(username : Text, email : Text, location : Text) : async Text {
+  public shared(msg) func createAccount(username : Text, email : Text, age : Nat, location : Text, description: Text, interest: Text) : async Text {
     let userId: Principal = msg.caller;
 
     if(checkUserExist(userId)){
@@ -90,9 +96,10 @@ actor Miyu{
       username = username; // Nama pengguna
       email = email;       // Email pengguna
       location = location; // Lokasi pengguna
-      description = "";     // Deskripsi awal kosong
+      description = description;     // Deskripsi pengguna
+      age = age;
       photos = [];         // Kosongkan dulu
-      interests = [];      // Tidak ada minat awal
+      interests = [interest];      // Tidak ada minat awal
       connections = null;    // Tidak ada koneksi awal
       connectionReqs = []; // Tidak ada koneksi awal
       reqTo = [];
@@ -104,7 +111,7 @@ actor Miyu{
     return "Account created successfully! with ID: " # Principal.toText(userId);    
   };
 
-  public shared(msg) func login() : async Text {
+  public query(msg) func login() : async Text {
     let userId: Principal = msg.caller;
     if(checkUserExist(userId)){
       return "Login Success!";
@@ -112,8 +119,24 @@ actor Miyu{
       return "User not found!";
     };
   };
-
-  public shared(msg) func updateProfile(username: ?Text, email: ?Text, location: ?Text, description: ?Text) : async Text {
+  public query(msg) func countPhotos() : async Nat {
+    let userId: Principal = msg.caller;
+    if(not checkUserExist(userId)){
+      return 0;
+    };
+    let currentUser = Array.find<User>(users, func(user: User): Bool {
+      user.id == userId;
+    });
+    switch (currentUser) {
+      case (null) {
+        return 0;
+      };
+      case (?user) {
+        return user.photos.size();
+      };
+    };
+  };
+  public shared(msg) func updateProfile(username: ?Text, email: ?Text, location: ?Text, age: ?Nat, description: ?Text) : async Text {
     let userId: Principal = msg.caller;
     if(not checkUserExist(userId)){
       return "User not found!";
@@ -146,6 +169,10 @@ actor Miyu{
               email = switch (email) {
                 case (null) { user.email };
                 case (?newEmail) { newEmail };
+              };
+              age = switch(age){
+                case(null){user.age};
+                case(?newAge){newAge};
               };
               photos = user.photos;
               connections = user.connections;
@@ -180,6 +207,7 @@ actor Miyu{
       connectionReqs = []; // Tidak ada koneksi awal
       reqTo = [];
       history = [];
+      age = 18;
     };
 
     users := Array.append(users, [newUser]);
@@ -237,6 +265,7 @@ actor Miyu{
           connectionReqs = Array.append(user.connectionReqs, [from]);
           reqTo = user.reqTo;
           history = user.history;
+          age = user.age;
         };
       } else if (user.id == from) {
         return {
@@ -251,6 +280,7 @@ actor Miyu{
           connectionReqs = user.connectionReqs;
           reqTo = Array.append(user.reqTo, [to]);
           history = user.history;
+          age = user.age;
         };
       } else {
         return user;
@@ -300,6 +330,7 @@ actor Miyu{
           connectionReqs = [];
           reqTo = [];
           history = user.history;
+          age = user.age;
         };
       } else if (user.id == from) {
         return {
@@ -314,6 +345,7 @@ actor Miyu{
           connectionReqs = [];
           reqTo = [];
           history = user.history;
+          age = user.age;
         };
       } else {
         return user;
@@ -363,6 +395,7 @@ actor Miyu{
                 });
           reqTo = user.reqTo;
           history = user.history;
+          age = user.age;
         };
       } else if (user.id == from) {
         return {
@@ -377,6 +410,7 @@ actor Miyu{
           connectionReqs = user.connectionReqs;
           reqTo = [];
           history = user.history;
+          age = user.age;
         };
       } 
       else {
@@ -433,6 +467,7 @@ actor Miyu{
               connectionReqs = user.connectionReqs;
               reqTo = user.reqTo;
               history = user.history;
+              age = user.age;
             };
           } else {
             return user;
@@ -475,6 +510,7 @@ actor Miyu{
               connectionReqs = user.connectionReqs;
               reqTo = user.reqTo;
               history = user.history;
+              age = user.age;
             };
           } else {
             return user;
@@ -513,6 +549,7 @@ actor Miyu{
               connectionReqs = user.connectionReqs;
               reqTo = user.reqTo;
               history = user.history;
+              age = user.age;
             };
           } else {
             return user;
@@ -565,6 +602,7 @@ actor Miyu{
               connectionReqs = user.connectionReqs;
               reqTo = user.reqTo;
               history = user.history;
+              age = user.age;
             };
           } else {
             return user;
@@ -680,6 +718,7 @@ actor Miyu{
                 connectionReqs = [];
                 reqTo = [];
                 history = Array.append(user.history, [userb]);
+                age = user.age;
             };
         } else if (user.id == userb) {
             return {
@@ -694,6 +733,7 @@ actor Miyu{
                 connectionReqs = [];
                 reqTo = [];
                 history = Array.append(user.history, [usera]);
+                age = user.age;
             };
         } 
         else {
@@ -747,6 +787,7 @@ actor Miyu{
         connectionReqs = [];
         reqTo = [];
         history = [];
+        age = 20;
     };
 
     let user2 = {
@@ -761,6 +802,7 @@ actor Miyu{
         connectionReqs = [];
         reqTo = [];
         history = [];
+        age = 27
     };
 
     let message1 = {

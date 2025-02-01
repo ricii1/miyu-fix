@@ -1,3 +1,31 @@
+import { miyu_fix_backend } from "../../declarations/miyu-fix-backend";
+
+// miyu_fix_backend.viewOtherReq()
+async function viewOtherReq() {
+    const response = await miyu_fix_backend.viewOtherReq();
+    console.log(response);
+}
+
+async function getMe(){
+    const response = await miyu_fix_backend.getMe();
+    console.log(response)
+}
+async function acceptRequest(id) {
+    const response = await miyu_fix_backend.accConnReq();
+    console.log(response);
+}
+
+async function deleteRequest(id){
+    const response = await miyu_fix_backend.deleteConnReq();
+    console.log(response);
+}
+
+// document.addEventListener("")
+// document.getElementById()
+document.addEventListener("DOMContentLoaded", function () {
+    viewOtherReq();
+})
+
 const settingsbutton = document.getElementById("settingsbutton");
 const sidebar = document.querySelector(".setsidebar");
 

@@ -1,62 +1,46 @@
 import { miyu_fix_backend } from "../../declarations/miyu-fix-backend";
-import { AuthClient } from "@dfinity/auth-client";
-import { Principal } from "@dfinity/principal";
-let authClient;
-async function initAuth(){
-    authClient = await AuthClient.create();
-    console.log("Auth client created");
-    const isAuthenticated = await authClient.isAuthenticated();
-    console.log(isAuthenticated);
-    // if (!isAuthenticated) {
-    //     window.location.href = "login.html";
-    // }else {
-    //     window.location.href = "../index.html";
-    // }
-}
+import Swal from 'sweetalert2'
 
-async function login(){
-    if(!authClient){
-        authClient = await AuthClient.create();
-    }
-    await authClient.login({
-        onSuccess: async () => {
-            console.log("Authenticated successfully");
-            window.location.href = "../index.html";
-        },
-        onError: (err) => {
-            console.error(err);
-        },
-    })
-    await miyu_fix_backend.login();
-}
-window.addEventListener("load", async () => {
-    await initAuth();
-});
-
-document.querySelector("#login").addEventListener("click", async () => {
-    await login();
-});
-
-window.addEventListener("load", () => {
-    const registerForm = document.querySelector("form"); 
-    registerForm.addEventListener("submit", async (event) => {
-        event.preventDefault(); 
-
-        const email = document.querySelector("#email").value;
-        const name = document.querySelector("#name").value;
-        const location = document.querySelector("#location").value;
-        const description = document.querySelector("#description").value;
-        const interest = document.querySelector("#interest").value;
-
-        console.log("Email: ", email);
-        console.log("Name: ", name);
-        console.log("Location: ", location);
-        console.log("Description: ", description);
-        console.log("Interest: ", interest);
-
-        // await miyu_fix_backend.register(email, name, location, description, interest);
-        // Redirect setelah berhasil registrasi (jika perlu)
-        // authClient = await AuthClient.create();
+document.querySelector("#login").addEventListener("click", async (event) => {
+    event.preventDefault();
+    document.querySelector("#login").disabled = true;
+    let res = await miyu_fix_backend.login();
+    if(res == "User not found!"){
+        console.log("masuk")
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'User not found! You must register first!',
+        });
+    }else {
         window.location.href = "../index.html";
-    });
+    }
+    document.querySelector("#login").disabled = false;
+});
+
+document.querySelector("#register").addEventListener("click", async (event) => {
+    event.preventDefault();
+    document.querySelector("#register").disabled = true;
+    const email = document.querySelector("#email").value;
+    const name = document.querySelector("#name").value;
+    const location = document.querySelector("#location").value;
+    const description = document.querySelector("#description").value;
+    const interest = document.querySelector("#interest").value;
+    const age = parseInt(document.querySelector("#age").value);
+
+    let registerResponse = await miyu_fix_backend.createAccount(name, email, age, location, description, interest);
+    if(registerResponse == "User with this ID already exists!"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'User with this ID already exists!',
+        });
+    }else {
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: registerResponse
+        })
+    }
+    document.querySelector("#register").disabled = false;
 });
