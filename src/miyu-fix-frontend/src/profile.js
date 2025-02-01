@@ -1,3 +1,87 @@
+import { Null } from "@dfinity/candid/lib/cjs/idl";
+import { miyu_fix_backend } from "../../declarations/miyu-fix-backend";
+import Swal from 'sweetalert2'
+window.addEventListener("load", async () => {
+    const isLoggedIn = await miyu_fix_backend.login();
+    if(isLoggedIn == "User not found!"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'User not found! You must register first!',
+            willClose: () => {
+                window.location.href = "src/login.html";
+            }
+        })
+    }
+    const getMe = await miyu_fix_backend.getMe();
+    document.querySelector("#title-username").textContent = getMe[1].username;
+    document.querySelector("#title-age").textContent = getMe[1].age;
+    document.querySelector("#title-location").textContent = getMe[1].location.toUpperCase();
+    document.querySelector("#title-description").textContent = getMe[1].description;
+    const gallery = document.querySelector("#gallery");
+    gallery.innerHTML = ""; // Clear existing content
+
+    const photos = getMe[1].photos;
+    let cardList;
+
+    photos.forEach((photo, index) => {
+        const url = URL.createObjectURL(new Blob([photo]));
+        if (index % 4 === 0) {
+            cardList = document.createElement("div");
+            cardList.className = "card-list";
+            gallery.appendChild(cardList);
+        }
+
+        const card = document.createElement("div");
+        card.className = "card";
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = `Photo ${index + 1}`;
+        card.appendChild(img);
+        cardList.appendChild(card);
+    });
+    document.querySelector(".cpdage input").value = getMe[1].age;
+    document.querySelector(".cpdcity input").value = getMe[1].location;
+    document.querySelector(".cpddesc input").value = getMe[1].description;
+    const interestsContainer = document.querySelector(".interest-tags");
+    getMe[1].interests.forEach(interest => {
+        const interestTag = document.createElement("div");
+        interestTag.className = "interest-tag";
+        interestTag.textContent = interest;
+        interestsContainer.appendChild(interestTag);
+    });
+    // document.querySelector("#title-interest").textContent = getMe[1].interest;
+});
+
+document.querySelector("#save").addEventListener("click", async (event) => {
+    event.preventDefault();
+    document.querySelector("#save").disabled = true;
+    const name = document.querySelector(".cpdname input").value;
+    const age = parseInt(document.querySelector(".cpdage input").value);
+    const city = document.querySelector(".cpdcity input").value;
+    const description = document.querySelector(".cpddesc input").value;
+    const interests = document.querySelector("#selected-interests").value.split(", ");
+    const file = document.querySelector("#fileUpload").files[0];
+    const response = await fetch(file);
+    const blob = await response.blob();
+    console.log("Name:", name);
+    console.log("Age:", age);
+    console.log("City:", city);
+    console.log("Description:", description);
+    console.log("Interests:", interests);
+    const updateProfileRes = await miyu_fix_backend.updateProfile([name], [], [city], [age], [description]);
+    const updateInterestRes = await miyu_fix_backend.updateInterest(interests);
+    console.log("File:", blob);
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+        const arrayBuffer = reader.result;
+        const uint8Array = new Uint8Array(arrayBuffer);
+        const addImage = await miyu_fix_backend.addImage(uint8Array);
+        console.log(addImage);
+    };
+    reader.readAsArrayBuffer(file); 
+});
+
 const settingsbutton = document.getElementById("settingsbutton");
 const sidebar = document.querySelector(".setsidebar");
 

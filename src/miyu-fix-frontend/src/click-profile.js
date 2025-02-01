@@ -1,3 +1,31 @@
+import { miyu_fix_backend } from "../../declarations/miyu-fix-backend";
+import Swal from 'sweetalert2'
+
+document.querySelector("#save").addEventListener("click", async (event) => {
+    event.preventDefault();
+    document.querySelector("#save").disabled = true;
+    const name = document.querySelector(".cpdname input").value;
+    const age = parseInt(document.querySelector(".cpdage input").value);
+    const city = document.querySelector(".cpdcity input").value;
+    const description = document.querySelector(".cpddesc input").value;
+    const interests = document.querySelector("#selected-interests").value.split(", ");
+    // const profileImage = document.querySelector("#profile-img").src;
+    // const response = await fetch(profileImage);
+    // const blob = await response.blob();
+    console.log("Name:", name);
+    console.log("Age:", age);
+    console.log("City:", city);
+    console.log("Description:", description);
+    console.log("Interests:", interests);
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Profile updated successfully!'
+    });
+    // console.log(interests);e
+    alert(interests);
+    // const response = await miyu_fix_backend.updateProfile(username, age, location, description, interests);
+});
 const settingsbutton = document.getElementById("settingsbutton");
 const sidebar = document.querySelector(".setsidebar");
 
