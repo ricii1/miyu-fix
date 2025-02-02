@@ -20,8 +20,6 @@ async function deleteRequest(id){
     console.log(response);
 }
 
-// document.addEventListener("")
-// document.getElementById()
 document.addEventListener("DOMContentLoaded", function () {
     viewOtherReq();
 })

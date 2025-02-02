@@ -1,6 +1,15 @@
-import { Null } from "@dfinity/candid/lib/cjs/idl";
 import { miyu_fix_backend } from "../../declarations/miyu-fix-backend";
 import Swal from 'sweetalert2'
+var username = "";
+var age = "";
+var location = "";
+var description = "";
+function fillForm(){
+    document.querySelector(".cpdname input").value = username;
+    document.querySelector(".cpdage input").value = age;
+    document.querySelector(".cpdcity input").value = location;
+    document.querySelector(".cpddesc input").value = description;    
+}
 window.addEventListener("load", async () => {
     const isLoggedIn = await miyu_fix_backend.login();
     if(isLoggedIn == "User not found!"){
@@ -14,10 +23,14 @@ window.addEventListener("load", async () => {
         })
     }
     const getMe = await miyu_fix_backend.getMe();
-    document.querySelector("#title-username").textContent = getMe[1].username;
-    document.querySelector("#title-age").textContent = getMe[1].age;
-    document.querySelector("#title-location").textContent = getMe[1].location.toUpperCase();
-    document.querySelector("#title-description").textContent = getMe[1].description;
+    username = getMe[1].username;
+    age = getMe[1].age;
+    location = getMe[1].location;
+    description = getMe[1].description;
+    document.querySelector("#title-username").textContent = username;
+    document.querySelector("#title-age").textContent = age;
+    document.querySelector("#title-location").textContent = location.toUpperCase();
+    document.querySelector("#title-description").textContent = description;
     const gallery = document.querySelector("#gallery");
     gallery.innerHTML = ""; // Clear existing content
 
@@ -40,9 +53,6 @@ window.addEventListener("load", async () => {
         card.appendChild(img);
         cardList.appendChild(card);
     });
-    document.querySelector(".cpdage input").value = getMe[1].age;
-    document.querySelector(".cpdcity input").value = getMe[1].location;
-    document.querySelector(".cpddesc input").value = getMe[1].description;
     const interestsContainer = document.querySelector(".interest-tags");
     getMe[1].interests.forEach(interest => {
         const interestTag = document.createElement("div");
@@ -50,7 +60,7 @@ window.addEventListener("load", async () => {
         interestTag.textContent = interest;
         interestsContainer.appendChild(interestTag);
     });
-    // document.querySelector("#title-interest").textContent = getMe[1].interest;
+    fillForm();
 });
 
 document.querySelector("#save").addEventListener("click", async (event) => {
@@ -63,23 +73,46 @@ document.querySelector("#save").addEventListener("click", async (event) => {
     const interests = document.querySelector("#selected-interests").value.split(", ");
     const file = document.querySelector("#fileUpload").files[0];
     const response = await fetch(file);
-    const blob = await response.blob();
     console.log("Name:", name);
     console.log("Age:", age);
     console.log("City:", city);
     console.log("Description:", description);
     console.log("Interests:", interests);
     const updateProfileRes = await miyu_fix_backend.updateProfile([name], [], [city], [age], [description]);
-    const updateInterestRes = await miyu_fix_backend.updateInterest(interests);
-    console.log("File:", blob);
+    if(updateProfileRes != "Profile updated successfully!"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Profile update failed!',
+        });
+    }
+    const updateInterestRes = await miyu_fix_backend.updateInterests(interests);
+    if(updateInterestRes != "Interests updated successfully!"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Interests update failed!',
+        });
+    }
     const reader = new FileReader();
     reader.onloadend = async () => {
         const arrayBuffer = reader.result;
         const uint8Array = new Uint8Array(arrayBuffer);
         const addImage = await miyu_fix_backend.addImage(uint8Array);
-        console.log(addImage);
+        if(addImage != "Image added successfully!"){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Image upload failed!',
+            });
+        }
     };
     reader.readAsArrayBuffer(file); 
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Profile updated successfully!'
+    });
 });
 
 const settingsbutton = document.getElementById("settingsbutton");

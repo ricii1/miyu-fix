@@ -1,0 +1,39 @@
+.upload-container {
+    display: flex;
+    width: 100%;
+    height: 300px;
+  }
+  
+  .upload-box {
+    border: 2px dashed rgba(0, 0, 0, 0.2);
+    width: 82%;
+    height: 150px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    background-color: #f9f9f9;
+  }
+  
+  .upload-box:hover {
+    border-color: #c20000;
+    background-color: #fff;
+  }
+  
+  .upload-icon {
+    margin-top: 4%;
+    width: 40px;
+    opacity: 0.7;
+    margin-bottom: 10px;
+  }
+  
+  .upload-text {
+    color: #c20000;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  

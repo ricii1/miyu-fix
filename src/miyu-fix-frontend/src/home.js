@@ -1,6 +1,17 @@
 import { miyu_fix_backend } from "../../declarations/miyu-fix-backend";
 import Swal from 'sweetalert2'
 
+var username = "";
+var age = "";
+var location = "";
+var description = "";
+function fillForm(){
+    document.querySelector(".cpdname input").value = username;
+    document.querySelector(".cpdage input").value = age;
+    document.querySelector(".cpdcity input").value = location;
+    document.querySelector(".cpddesc input").value = description;    
+}
+
 const settingsbutton = document.getElementById("settingsbutton");
 const sidebar = document.querySelector(".setsidebar");
 
@@ -17,12 +28,115 @@ window.addEventListener("load", async () => {
         })
     }
     const getMe = await miyu_fix_backend.getMe();
-    document.querySelector("#username-profile").textContent = getMe[1].username;
-    const userInterest = getMe[1].interests[0];
-    const userLocation = getMe[1].location;
-    console.log(await miyu_fix_backend.getAllUsersWithSameInterest(userInterest));
-    console.log(await miyu_fix_backend.getAllUsersWithSameLocation(userLocation));
+    username = getMe[1].username;
+    age = getMe[1].age;
+    location = getMe[1].location;
+    description = getMe[1].description;
+    document.querySelector("#username-profile").textContent = username;
+    fillForm();
+    const userLocation = location;
+    const usersWithSameLocation = await miyu_fix_backend.getAllUsersWithSameLocation(userLocation);
+    const cardList = document.querySelector("#near-you");
+    cardList.innerHTML = "";
+    usersWithSameLocation.forEach(user => {
+        const userLink = document.createElement("a");
+        userLink.href = `profile.html?user=${user.id.toString()}`;
+        const userCard = document.createElement("div");
+        userCard.classList.add("card");
+        const userImg = document.createElement("img");
+        const imgUrl = URL.createObjectURL(new Blob([user.photos[0]]));
+        userImg.src = imgUrl;
+        userImg.alt = user.username + " picture";
+        const userDetails = document.createElement("div");
+        userDetails.classList.add("details");
+        userDetails.innerHTML = `${user.username}, ${user.age}<br><span>${user.location}</span>`;
+        userCard.appendChild(userImg);
+        userCard.appendChild(userDetails);
+        userLink.appendChild(userCard);
+        cardList.appendChild(userLink);
+    });
+    let userInterestArray = [];
+    for(let i = 0; i < getMe[1].interests.length; i++){
+        userInterestArray.push(getMe[1].interests[i]);
+    }
+    const cardListInterest = document.querySelector("#same-hobbies");
+    cardListInterest.innerHTML = "";
+    for (const interest of userInterestArray) {
+        console.log(interest);
+        const usersWithSameInterest = await miyu_fix_backend.getAllUsersWithSameInterest(interest);
+        console.log(usersWithSameInterest);
+        usersWithSameInterest.forEach(user => {
+            console.log(user.id.toString());
+            const userLink = document.createElement("a");
+            userLink.href = `profile.html?user=${user.id.toString()}`;
+            const userCard = document.createElement("div");
+            userCard.classList.add("card");
+            const userImg = document.createElement("img");
+            const imgUrl = URL.createObjectURL(new Blob([user.photos[0]]));
+            userImg.src = imgUrl;
+            userImg.alt = user.username + " picture";
+            const userDetails = document.createElement("div");
+            userDetails.classList.add("details");
+            userDetails.innerHTML = `${user.username}, ${user.age}<br><span>${user.location}</span>`;
+            userCard.appendChild(userImg);
+            userCard.appendChild(userDetails);
+            userLink.appendChild(userCard);
+            cardListInterest.appendChild(userLink);
+        });
+    }
+});
 
+
+document.querySelector("#save").addEventListener("click", async (event) => {
+    event.preventDefault();
+    document.querySelector("#save").disabled = true;
+    const name = document.querySelector(".cpdname input").value;
+    const age = parseInt(document.querySelector(".cpdage input").value);
+    const city = document.querySelector(".cpdcity input").value;
+    const description = document.querySelector(".cpddesc input").value;
+    const interests = document.querySelector("#selected-interests").value.split(", ");
+    const file = document.querySelector("#fileUpload").files[0];
+    const response = await fetch(file);
+    console.log("Name:", name);
+    console.log("Age:", age);
+    console.log("City:", city);
+    console.log("Description:", description);
+    console.log("Interests:", interests);
+    const updateProfileRes = await miyu_fix_backend.updateProfile([name], [], [city], [age], [description]);
+    if(updateProfileRes != "Profile updated successfully!"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Profile update failed!',
+        });
+    }
+    const updateInterestRes = await miyu_fix_backend.updateInterests(interests);
+    if(updateInterestRes != "Interests updated successfully!"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Interests update failed!',
+        });
+    }
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+        const arrayBuffer = reader.result;
+        const uint8Array = new Uint8Array(arrayBuffer);
+        const addImage = await miyu_fix_backend.addImage(uint8Array);
+        if(addImage != "Image added successfully!"){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Image upload failed!',
+            });
+        }
+    };
+    reader.readAsArrayBuffer(file); 
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Profile updated successfully!'
+    });
 });
 
 settingsbutton.addEventListener("click", () => {
