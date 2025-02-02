@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 const urlParams = new URLSearchParams(window.location.search);
 const userId = urlParams.get("user");
+console.log(userId);
 
 document.querySelector("#save").addEventListener("click", async (event) => {
     event.preventDefault();

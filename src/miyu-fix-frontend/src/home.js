@@ -61,27 +61,28 @@ window.addEventListener("load", async () => {
     }
     const cardListInterest = document.querySelector("#same-hobbies");
     cardListInterest.innerHTML = "";
+    const displayedUsers = new Set();
     for (const interest of userInterestArray) {
-        console.log(interest);
         const usersWithSameInterest = await miyu_fix_backend.getAllUsersWithSameInterest(interest);
-        console.log(usersWithSameInterest);
         usersWithSameInterest.forEach(user => {
-            console.log(user.id.toString());
-            const userLink = document.createElement("a");
-            userLink.href = `src/click-profile.html?user=${user.id.toString()}`;
-            const userCard = document.createElement("div");
-            userCard.classList.add("card");
-            const userImg = document.createElement("img");
-            const imgUrl = URL.createObjectURL(new Blob([user.photos[0]]));
-            userImg.src = imgUrl;
-            userImg.alt = user.username + " picture";
-            const userDetails = document.createElement("div");
-            userDetails.classList.add("details");
-            userDetails.innerHTML = `${user.username}, ${user.age}<br><span>${user.location}</span>`;
-            userCard.appendChild(userImg);
-            userCard.appendChild(userDetails);
-            userLink.appendChild(userCard);
-            cardListInterest.appendChild(userLink);
+            if (!displayedUsers.has(user.id.toString())) {
+                displayedUsers.add(user.id.toString());
+                const userLink = document.createElement("a");
+                userLink.href = `src/click-profile.html?user=${user.id.toString()}`;
+                const userCard = document.createElement("div");
+                userCard.classList.add("card");
+                const userImg = document.createElement("img");
+                const imgUrl = URL.createObjectURL(new Blob([user.photos[0]]));
+                userImg.src = imgUrl;
+                userImg.alt = user.username + " picture";
+                const userDetails = document.createElement("div");
+                userDetails.classList.add("details");
+                userDetails.innerHTML = `${user.username}, ${user.age}<br><span>${user.location}</span>`;
+                userCard.appendChild(userImg);
+                userCard.appendChild(userDetails);
+                userLink.appendChild(userCard);
+                cardListInterest.appendChild(userLink);
+            }
         });
     }
 });

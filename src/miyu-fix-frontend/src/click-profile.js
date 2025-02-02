@@ -83,13 +83,13 @@ window.addEventListener("load", async () => {
 
     const photos = profile.photos;
 
+    let cardList = null;
     photos.forEach((photo, index) => {
         const url = URL.createObjectURL(new Blob([photo]));
         if(index == 0){
             document.querySelector("#profile-image").src = url;
         }else {
-            var cardList;
-            if ((index-1) % 4 === 0) {
+            if ((index-1) % 4 === 0 || !cardList) {
                 cardList = document.createElement("div");
                 cardList.className = "card-list";
                 gallery.appendChild(cardList);

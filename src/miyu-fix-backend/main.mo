@@ -32,6 +32,7 @@ actor Miyu {
   stable var chats : [Message] = [];
   public func resetUsers() : async Text {
     users := [];
+    chats := [];
     return "Users reset successfully!";
   };
   public query (msg) func getMe() : async (Text, User) {
@@ -600,6 +601,48 @@ actor Miyu {
       };
     };
   };
+  public shared func addImagebyID(userId : Principal, image : Blob) : async Text {
+    if (not checkUserExist(userId)) {
+      return "User not found!";
+    };
+    let currentUser = Array.find<User>(
+      users,
+      func(user : User) : Bool {
+        user.id == userId;
+      },
+    );
+    switch (currentUser) {
+      case (null) {
+        return "User not found!";
+      };
+      case (?user) {
+        users := Array.map<User, User>(
+          users,
+          func(user : User) : User {
+            if (user.id == userId) {
+              return {
+                id = user.id;
+                username = user.username;
+                location = user.location;
+                description = user.description;
+                interests = user.interests;
+                email = user.email;
+                photos = Array.append(user.photos, [image]);
+                connections = user.connections;
+                connectionReqs = user.connectionReqs;
+                reqTo = user.reqTo;
+                history = user.history;
+                age = user.age;
+              };
+            } else {
+              return user;
+            };
+          },
+        );
+        return "Image added successfully!";
+      };
+    };
+  };
   public shared (msg) func changeImage(prevImage : Blob, newImage : Blob) : async Text {
     let userId = msg.caller;
     if (not checkUserExist(userId)) {
@@ -957,9 +1000,11 @@ actor Miyu {
   };
 
   public shared func seedData() : async Text {
+    let user0Id = Principal.fromText("2vxsx-fae");
 
-    let user0 = {
-        id = Principal.fromText("2vxsx-fae");
+    if (not checkUserExist(user0Id)) {
+      let user0 = {
+        id = user0Id;
         username = "Karina Blu";
         email = "karina@example.com";
         location = "Surabaya";
@@ -967,13 +1012,42 @@ actor Miyu {
         interests = ["Dance", "Travel", "Cooking"];
         photos = [];
         connections = null;
-        connectionReqs = [
-        Principal.fromText("zs5u7-m6nsd-65goi-ejobf-grqtb-kblgo-z6gdp-b6hpm-bm72g-xxbm3-xqe"), 
-        Principal.fromText("diyiq-lzay3-paogz-ji5ks-axftj-zi2nn-vp54f-odazr-55aqb-z7w6m-5qe") ];
+        connectionReqs = [];
         reqTo = [];
-        history = [Principal.fromText("evcpq-wcpll-mbjag-q5lt6-zbibn-a5evp-sweht-gpxan-v7mlx-ihfhs-fae")]; 
+        history = [];
         age = 24;
+      };
+      users := Array.append(users, [user0]);
     };
+
+    users := Array.map<User, User>(
+      users,
+      func(user : User) : User {
+        if (user.id == user0Id) {
+          return {
+            id = user.id;
+            username = user.username;
+            email = user.email;
+            location = user.location;
+            description = user.description;
+            interests = user.interests;
+            photos = user.photos;
+            connections = user.connections;
+            connectionReqs = Array.append(user.connectionReqs, [
+              Principal.fromText("zs5u7-m6nsd-65goi-ejobf-grqtb-kblgo-z6gdp-b6hpm-bm72g-xxbm3-xqe"), 
+              Principal.fromText("diyiq-lzay3-paogz-ji5ks-axftj-zi2nn-vp54f-odazr-55aqb-z7w6m-5qe")
+            ]);
+            reqTo = user.reqTo;
+            history = Array.append(user.history, [
+              Principal.fromText("evcpq-wcpll-mbjag-q5lt6-zbibn-a5evp-sweht-gpxan-v7mlx-ihfhs-fae")
+            ]);
+            age = user.age;
+          };
+        } else {
+          return user;
+        }
+      }
+    );
 
     let user1 = {
         id = Principal.fromText("bcogc-zszir-ch2hc-o3mwo-brkxq-mane7-wvyah-ayk7b-ykjc2-25zn4-wqe");
@@ -1065,13 +1139,13 @@ actor Miyu {
 
     let message1 = {
         from = user1.id;
-        to = user0.id;
-        timestamp = Time.now();
+        to = Principal.fromText("2vxsx-fae");
+        timestamp = Time.now()-10;
         content = "Haloo Karina!";
     };
 
     let message2 = {
-        from = user0.id;
+        from = Principal.fromText("2vxsx-fae");
         to = user1.id;
         timestamp = Time.now();
         content = "Haloo jugaa";
@@ -1079,13 +1153,13 @@ actor Miyu {
 
     let message4 = {
         from = user3.id;
-        to = user0.id;
-        timestamp = Time.now();
+        to = Principal.fromText("2vxsx-fae");
+        timestamp = Time.now()-10;
         content = "Hey Karina! I would like to know you better.";
     };
 
     let message5 = {
-        from = user0.id;
+        from = Principal.fromText("2vxsx-fae");
         to = user3.id;
         timestamp = Time.now();
         content = "Boleee. What do you want me to call you?";
@@ -1093,54 +1167,54 @@ actor Miyu {
 
     let message6 = {
         from = user4.id;
-        to = user0.id;
+        to = Principal.fromText("2vxsx-fae");
         timestamp = Time.now();
         content = "Loh Karina! Inget aku ngga? Ini Jaxon dari SMA Global Prestasi.";
     };
 
     let message7 = {
-        from = user0.id;
+        from = Principal.fromText("2vxsx-fae");
         to = user5.id;
-        timestamp = Time.now();
+        timestamp = Time.now()-30;
         content = "Ehh itu di foto tanganmu kenapa?";
     };
 
     let message8 = {
         from = user5.id;
-        to = user0.id;
-        timestamp = Time.now();
+        to = Principal.fromText("2vxsx-fae");
+        timestamp = Time.now()-20;
         content = "Tanganku??? Ngga papa kok. EMang ada apaa??";
     };
 
     let message9 = {
-        from = user0.id;
+        from = Principal.fromText("2vxsx-fae");
         to = user5.id;
-        timestamp = Time.now();
+        timestamp = Time.now()-10;
         content = "Well, your hand looks lonely. I can hold it for you.";
     };
 
     let message10 = {
         from = user5.id;
-        to = user0.id;
+        to = Principal.fromText("2vxsx-fae");
         timestamp = Time.now();
         content = "Ohwaw. Alright then, where should we meet?";
     };
 
     let message11 = {
-        from = user0.id;
+        from = Principal.fromText("2vxsx-fae");
         to = user6.id;
-        timestamp = Time.now();
+        timestamp = Time.now()-10;
         content = "All your pics came thru at a 45 degree angle.";
     };
 
     let message12 = {
-        from = user0.id;
+        from = Principal.fromText("2vxsx-fae");
         to = user6.id;
         timestamp = Time.now();
         content = "Guess you're acute-y";
     };
 
-    users := Array.append(users, [user0, user1, user2, user3, user4, user5, user6]);
+    users := Array.append(users, [user1, user2, user3, user4, user5, user6]);
     chats := Array.append(chats, [message1, message2, message4, message5, message6, message7, message8, message9, message10, message11, message12]);
 
     return "Data seeded successfully!";

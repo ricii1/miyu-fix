@@ -11,21 +11,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-    <script defer src="chat.js"></script>
+    <script defer src="chat.js" type="module"></script>
 </head>
 <body>
     <div class="container">
         <aside class="sidebar">
             <div class="logo">miyu</div>
             <nav class="menu">
-                <a href="../index.html" class="menu-item"><img src="../assets/homeicon.png" alt="homeicon" class="homeicon"></a>
-                <a href="match.html" class="menu-item"><img src="../assets/matchicon.png" alt="matchicon" class="matchicon"></a>
-                <a href="chat.html" class="menu-item"><img src="../assets/chaticon.png" alt="chaticon" class="chaticon"></a>
-                <a href="profile.html" class="menu-item"><img src="../assets/profileicon.png" alt="profileicon" class="profileicon"></a>
+                <a href="../index.html" class="menu-item"><img src="/homeicon.png" alt="homeicon" class="homeicon"></a>
+                <a href="match.html" class="menu-item"><img src="/matchicon.png" alt="matchicon" class="matchicon"></a>
+                <a href="chat.html" class="menu-item"><img src="/chaticon.png" alt="chaticon" class="chaticon"></a>
+                <a href="profile.html" class="menu-item"><img src="/profileicon.png" alt="profileicon" class="profileicon"></a>
             </nav>
             <nav class="settings">
                 <button id="settingsbutton">
-                  <a href="#settings" class="menu-item"><img src="../assets/settingicon.png" alt="settingicon" class="settingicon"></a>
+                  <a href="#settings" class="menu-item"><img src="/settingicon.png" alt="settingicon" class="settingicon"></a>
               </button>
                 <a href="login.html" class="menu-item">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -85,7 +85,7 @@
                 <div class="cp">
                     <!-- Profile Image Section -->
                     <a href="#" id="change-pp">
-                        <img id="profile-img" src="../assets/your_pfp.png" alt="cp" />
+                        <img id="profile-img" src="/your_pfp.png" alt="cp" />
                     </a>
                     <input type="file" id="image-input" accept="image/*">
                     <span>Change Profile</span>
@@ -170,7 +170,7 @@
                         </label>
                     </div>
                     <div class="submit">
-                        <button type="submit" class="submit-btn">Save</button>
+                        <button type="submit" class="submit-btn" id="save">Save</button>
                     </div>
                 </div>
             </form>
@@ -219,7 +219,7 @@
     
                 <form>
                     <div class="search">
-                        <button id="menu-button"><img src="../assets/menuicon.png" class="menu-icon" alt="menu-icon"></button>
+                        <button id="menu-button"><img src="/menuicon.png" class="menu-icon" alt="menu-icon"></button>
                         <input class="search-input" type="search" placeholder="Search">
                         <button id="search-button"><span class="search-icon material-symbols-outlined">search</span></button>
                     </div>
@@ -228,442 +228,9 @@
             
 
             <div class="contact-list">
-                <button id="chat1">
-                    <div class="message-card">
-                        <div class="cl-profile"><img src="../assets/Person1.png" alt="p1"></div>
-
-                        <div class="column">
-                            <div class="cl-name">Park Jongseong</div>
-                            <div class="cl-text">Wait, gtg</div>
-                        </div>
-                        <div class="column-right">
-                            <div class="cl-notif">19</div>
-                        </div>
-                    </div>
-                </button>
-
-                <button id="chat2">
-                <div class="message-card">
-                    <div class="cl-profile"><img src="../assets/Person2.png" alt="p1"></div>
-
-                    <div class="column">
-                        <div class="cl-name">Jake</div>
-                        <div class="cl-text">How's ur week...</div>
-                    </div>
-                    <div class="column-right">
-                        <div class="cl-notif">2</div>
-                    </div>
-                </div>
-                </button>
-                <button id="chat3">
-                <div class="message-card">
-                    <div class="cl-profile"><img src="../assets/Person3.png" alt="p1"></div>
-
-                    <div class="column">
-                        <div class="cl-name">Niki</div>
-                        <div class="cl-text">My name is Niki, what are...</div>
-                    </div>
-                    <div class="column-right">
-                        <div class="cl-notif">2</div>
-                    </div>
-                </div>
-            </button>
-            <button id="chat4">
-                <div class="message-card">
-                    <div class="cl-profile"><img src="../assets/Person4.png" alt="p1"></div>
-
-                    <div class="column">
-                        <div class="cl-name">Mark</div>
-                        <div class="cl-text">Would you mind to...</div>
-                    </div>
-                    <div class="column-right">
-                        <div class="cl-notif">4</div>
-                    </div>
-                </div>
-            </button>
-            <button id="chat5">
-                <div class="message-card">
-                    <div class="cl-profile"><img src="../assets/Person5.jpg" alt="p1"></div>
-
-                    <div class="column">
-                        <div class="cl-name">Choi Hyunwook</div>
-                        <div class="cl-text">Let's go dinner at...</div>
-                    </div>
-                    <div class="column-right">
-                        <div class="cl-notif">2</div>
-                    </div>
-                </div>
-            </button>
-            <button id="chat6">
-                <div class="message-card">
-                    <div class="cl-profile"><img src="../assets/Person6.jpg" alt="p1"></div>
-
-                    <div class="column">
-                        <div class="cl-name">Si Jamet</div>
-                        <div class="cl-text">Anjay</div>
-                    </div>
-                    <div class="column-right">
-                        <div class="cl-notif">6</div>
-                    </div>
-                </div>
-            </button>
-            <button id="chat7">
-                <div class="message-card">
-                    <div class="cl-profile"><img src="../assets/Person7.jpg" alt="p1"></div>
-
-                    <div class="column">
-                        <div class="cl-name">Richardo</div>
-                        <div class="cl-text">I'm busy right now, chat...</div>
-                    </div>
-                    <div class="column-right">
-                        <div class="cl-notif">1</div>
-                    </div>
-                </div>
-            </button>
-            <button id="chat8">
-                <div class="message-card-read">
-                    <div class="cl-profile"><img src="../assets/Person8.webp" alt="p1"></div>
-
-                    <div class="column">
-                        <div class="cl-name">Mickey Will</div>
-                        <div class="cl-text">I'm sorry, I've no interest on...</div>
-                    </div>
-                    <div class="column-right">
-                    </div>
-                </div>
-            </button>
             </div>
         </contact>
-
-
-
-
-
         <main class="main-content">
-            <div class="personchat" data-chat="chat1">
-                <header class="header">
-                    <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person1.png" alt="p1"></div></a>
-                        <div class="column">
-                            <div class="cl-name">Park Jongseong</div>
-                        </div>
-                    </div>
-                </header>
-
-
-                <section class="chatzone">
-                    <div class="datetime">Sat, 25 Jan 2025</div>
-                    <div class="sender">
-                        <div class="chatbox">Hi, my hobby is reading magazine and watching dramas.</div>
-                        <div class="chattime">09:12 AM</div>
-                    </div>
-                    <div class="receiver">
-                        <div class="chatbox">What kind of drama do you like? Eastern?</div>
-                        <div class="chatbox">I kinda like drama, but I like fantasy movie more than drama. Do you know Alice in Wonderland?</div>
-                        <div class="chattime">09:15 AM</div>
-                    </div>
-                    <div class="sender">
-                        <div class="chatbox">Yeah, I know that movie too, it's very popular.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div><div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chatbox">Wait, gtg.</div>
-                        <div class="chattime">20 mins ago</div>
-                    </div>
-                </section>
-                <form>
-                    <div class="typing">
-                        <label for="cam">
-                            <img src="../assets/camicon.png" class="typing-label">
-                        </label>
-                        <input id="cam" type="file" accept="image/*">
-                        <input class="text" id="filename" type="text" placeholder="Type message here...">
-                        <div class="submit">
-                            <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="personchat" data-chat="chat2">
-                <header class="header">
-                    <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person2.png" alt="p1"></div></a>
-                        <div class="column">
-                            <div class="cl-name">Jake</div>
-                        </div>
-                    </div>
-                </header>
-
-
-                <section class="chatzone">
-                    <div class="datetime">Sat, 25 Jan 2025</div>
-                    <div class="receiver">
-                        <div class="chatbox">Hello, my name is Karina. I'm an ordinary collage student.</div>
-                        <div class="chattime">10:12 AM</div>
-                    </div>
-                    <div class="sender">
-                        <div class="chatbox">Oh hello Karina.</div>
-                        <div class="chatbox">How's ur week in collage?</div>
-                        <div class="chattime">09:15 AM</div>
-                    </div>
-                </section>
-                <form>
-                    <div class="typing">
-                        <label for="cam">
-                            <img src="../assets/camicon.png" class="typing-label">
-                        </label>
-                        <input id="cam" type="file" accept="image/*">
-                        <input class="text" id="filename" type="text" placeholder="Type message here...">
-                        <div class="submit">
-                            <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="personchat" data-chat="chat3">
-                <header class="header">
-                    <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person3.png" alt="p1"></div></a>
-                        <div class="column">
-                            <div class="cl-name">Niki</div>
-                        </div>
-                    </div>
-                </header>
-
-
-                <section class="chatzone">
-                    <div class="datetime">Fri, 24 Jan 2025</div>
-                    <div class="receiver">
-                        <div class="chatbox">Hello, my name is Karina. I'm an ordinary collage student.</div>
-                        <div class="chattime">6:12 PM</div>
-                    </div>
-                    <div class="sender">
-                        <div class="chatbox">Oh hello Karina.</div>
-                        <div class="chatbox">My name is Niki, what are you doing this weekend?</div>
-                        <div class="chattime">6:32 PM</div>
-                    </div>
-                </section>
-                <form>
-                    <div class="typing">
-                        <label for="cam">
-                            <img src="../assets/camicon.png" class="typing-label">
-                        </label>
-                        <input id="cam" type="file" accept="image/*">
-                        <input class="text" id="filename" type="text" placeholder="Type message here...">
-                        <div class="submit">
-                            <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="personchat" data-chat="chat4">
-                <header class="header">
-                    <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person4.png" alt="p1"></div></a>
-                        <div class="column">
-                            <div class="cl-name">Mark</div>
-                        </div>
-                    </div>
-                </header>
-
-
-                <section class="chatzone">
-                    <div class="datetime">Fri, 24 Jan 2025</div>
-                    <div class="sender">
-                        <div class="chatbox">Hi, my name is Mark</div>
-                        <div class="chatbox">I've interest on you</div>
-                        <div class="chatbox">Would you mind to be my date?</div>
-                        <div class="chattime">10:40 AM</div>
-                    </div>
-                </section>
-                <form>
-                    <div class="typing">
-                        <label for="cam">
-                            <img src="../assets/camicon.png" class="typing-label">
-                        </label>
-                        <input id="cam" type="file" accept="image/*">
-                        <input class="text" id="filename" type="text" placeholder="Type message here...">
-                        <div class="submit">
-                            <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="personchat" data-chat="chat5">
-                <header class="header">
-                    <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person5.jpg" alt="p1"></div></a>
-                        <div class="column">
-                            <div class="cl-name">Choi Hyunwook</div>
-                        </div>
-                    </div>
-                </header>
-
-
-                <section class="chatzone">
-                    <div class="datetime">Thu, 23 Jan 2025</div>
-                    <div class="receiver">
-                        <div class="chatbox">Hi, my name Karina</div>
-                        <div class="chatbox">I've interest on you</div>
-                        <div class="chatbox">Do you have any date plan?</div>
-                        <div class="chattime">2:40 PM</div>
-                    </div>
-                    <div class="sender">
-                        <div class="chatbox">Sure, How about dinner date?</div>
-                        <div class="chatbox">Let's go dinner at Daiviris Resto, Monday next week at 4 PM, if you insist</div>
-                        <div class="chattime">2:43 PM</div>
-                    </div>
-                </section>
-                <form>
-                    <div class="typing">
-                        <label for="cam">
-                            <img src="../assets/camicon.png" class="typing-label">
-                        </label>
-                        <input id="cam" type="file" accept="image/*">
-                        <input class="text" id="filename" type="text" placeholder="Type message here...">
-                        <div class="submit">
-                            <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="personchat" data-chat="chat6">
-                <header class="header">
-                    <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person6.jpg" alt="p1"></div></a>
-                        <div class="column">
-                            <div class="cl-name">Si Jamet</div>
-                        </div>
-                    </div>
-                </header>
-
-
-                <section class="chatzone">
-                    <div class="datetime">Thu, 23 Jan 2025</div>
-                    <div class="receiver">
-                        <div class="chatbox">Halo, apa kabar. Kamu beneran orang Indonesia kan?</div>
-                        <div class="chatbox">Aku Karina, lagi sibuk kuliah sih, sepertinya kamu menarik.</div>
-                        <div class="chattime">09:40 AM</div>
-                    </div>
-                    <div class="sender">
-                        <div class="chatbox">Halo Karina</div>
-                        <div class="chatbox">Senang berkenalan</div>
-                        <div class="chatbox">kamu mulai pakai web ini sejak kapan?</div>
-                        <div class="chatbox">hobiku biasa kumpul sama temen sih</div>
-                        <div class="chatbox">Tumben ketemu orang Indo di sini</div>
-                        <div class="chatbox">Anjay</div>
-                        <div class="chattime">09:43 AM</div>
-                    </div>
-                </section>
-                <form>
-                    <div class="typing">
-                        <label for="cam">
-                            <img src="../assets/camicon.png" class="typing-label">
-                        </label>
-                        <input id="cam" type="file" accept="image/*">
-                        <input class="text" id="filename" type="text" placeholder="Type message here...">
-                        <div class="submit">
-                            <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="personchat" data-chat="chat7">
-                <header class="header">
-                    <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person7.jpg" alt="p1"></div></a>
-                        <div class="column">
-                            <div class="cl-name">Richardo</div>
-                        </div>
-                    </div>
-                </header>
-
-
-                <section class="chatzone">
-                    <div class="datetime">Thu, 16 Jan 2025</div>
-                    <div class="receiver">
-                        <div class="chatbox">Hello, my name is Karina, I've interest on you.</div>
-                        <div class="chattime">09:40 AM</div>
-                    </div>
-                    <div class="sender">
-                        <div class="chatbox">I'm busy right now, chat me later after worktime.</div>
-                        <div class="chattime">11:43 AM</div>
-                    </div>
-                </section>
-                <form>
-                    <div class="typing">
-                        <label for="cam">
-                            <img src="../assets/camicon.png" class="typing-label">
-                        </label>
-                        <input id="cam" type="file" accept="image/*">
-                        <input class="text" id="filename" type="text" placeholder="Type message here...">
-                        <div class="submit">
-                            <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="personchat" data-chat="chat8">
-                <header class="header">
-                    <div class="from">
-                        <a href="#cl-profile"><div class="cl-profile"><img src="../assets/Person8.webp" alt="p1"></div></a>
-                        <div class="column">
-                            <div class="cl-name">Mickey will</div>
-                        </div>
-                    </div>
-                </header>
-
-
-                <section class="chatzone">
-                    <div class="datetime">Wed, 1 Jan 2025</div>
-                    <div class="receiver">
-                        <div class="chatbox">Hello, my name is Karina, I've interest on you.</div>
-                        <div class="chattime">08:20 AM</div>
-                    </div>
-                    <div class="sender">
-                        <div class="chatbox">Hello Karina.</div>
-                        <div class="chatbox">Nice to meet you Karina, but I think our fate is end here.</div>
-                        <div class="chatbox">AKA</div>
-                        <div class="chatbox">I'm sorry, I've no interest on you, maybe we should look for other person to date with.</div>
-                        <div class="chattime">09:43 AM</div>
-                    </div>
-                </section>
-                <form>
-                    <div class="typing">
-                        <label for="cam">
-                            <img src="../assets/camicon.png" class="typing-label">
-                        </label>
-                        <input id="cam" type="file" accept="image/*">
-                        <input class="text" id="filename" type="text" placeholder="Type message here...">
-                        <div class="submit">
-                            <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-
-            
         </main>
     </div>
 </body>

@@ -57,7 +57,7 @@ window.addEventListener("load", async () => {
         card.classList.add("card-req");
 
         const userLink = document.createElement("a");
-        userLink.href = `click-profile.html`;
+        userLink.href = `click-profile.html?user=${user.id.toString()}`;
 
         const userImg = document.createElement("img");
         const imgUrl = URL.createObjectURL(new Blob([user.photos[0]]));
@@ -125,18 +125,21 @@ window.addEventListener("load", async () => {
     const history = await miyu_fix_backend.getHistory();
     const historyList = document.querySelector("#last-matches");
     historyList.innerHTML="";
-    history.forEach(user => {
+    history.forEach(async (user) => {
+        const userDetailReq = await miyu_fix_backend.getUserDetail(user);
+        // console.log(userData);
+        const userData = userDetailReq[1];
         const userLink = document.createElement("a");
-        userLink.href = `profile.html?user=${user.id.toString()}`;
+        userLink.href = `click-profile.html?user=${userData.id.toString()}`;
         const userCard = document.createElement("div");
         userCard.classList.add("card");
         const userImg = document.createElement("img");
-        const imgUrl = URL.createObjectURL(new Blob([user.photos[0]]));
+        const imgUrl = URL.createObjectURL(new Blob([userData.photos[0]]));
         userImg.src = imgUrl;
-        userImg.alt = user.username + " picture";
+        userImg.alt = userData.username + " picture";
         const userDetails = document.createElement("div");
         userDetails.classList.add("details");
-        userDetails.innerHTML = `${user.username}, ${user.age}<br><span>${user.location}</span>`;
+        userDetails.innerHTML = `${userData.username}, ${userData.age}<br><span>${userData.location}</span>`;
         userCard.appendChild(userImg);
         userCard.appendChild(userDetails);
         userLink.appendChild(userCard);
