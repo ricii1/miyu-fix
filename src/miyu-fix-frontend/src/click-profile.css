@@ -734,7 +734,23 @@ a {
   .match-button:hover{
     transform: scale(1.05);
     transition: all 0.3s ease-in-out;
-}
+  }
+
+  .remove-button {
+    border-radius: 30px;
+    background-color: #F60A0A;
+    padding: 12px 32px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgb(0, 0, 0);
+    visibility: hidden;
+  }
+
+  .remove-button:hover{
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+  }
+
   .action-icon {
     aspect-ratio: 1.22;
     object-fit: contain;

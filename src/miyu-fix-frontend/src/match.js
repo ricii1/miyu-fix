@@ -97,8 +97,21 @@ window.addEventListener("load", async () => {
         const xmarkIcon = document.createElement("div");
         xmarkIcon.classList.add("xmark");
         xmarkIcon.innerHTML = `<i class="fa-regular fa-circle-xmark"></i>`;
-        xmarkIcon.addEventListener("click", () => {
-            console.log("x", user.id);
+        xmarkIcon.addEventListener("click", async() => {
+            let res = await miyu_fix_backend.deleteConnReq(user.id);
+            if(res.startsWith("Error")){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Connection request failed! ' + res,
+                }); 
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: res,
+                });
+            }
         });
 
         actionIcons.appendChild(checkIcon);

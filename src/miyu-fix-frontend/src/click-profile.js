@@ -31,6 +31,10 @@ window.addEventListener("load", async () => {
     age = getMe[1].age;
     location = getMe[1].location;
     description = getMe[1].description;
+    if(getMe[1].connections.toString() == userId){
+        document.querySelector("#match-button").style.display = "none";
+        document.querySelector("#remove-button").style.visibility = "visible";
+    }
     document.querySelector("#profile-name").textContent = username;
     fillForm();
     if(!isValidPrincipal(userId)){
@@ -120,6 +124,27 @@ document.querySelector("#match-button").addEventListener("click", async (event) 
     }
     event.target.disabled = false;
 });
+
+document.querySelector("#remove-button").addEventListener("click", async (event) => {
+    event.preventDefault();
+    event.target.disabled = true;
+    const response = await miyu_fix_backend.deleteNowConnection(Principal.fromText(userId));
+    if(response.startsWith("Error")){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: response
+        });
+    }else{
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: response,
+        });
+    }
+    event.target.disabled = false;
+});
+
 document.querySelector("#save").addEventListener("click", async (event) => {
     event.preventDefault();
     document.querySelector("#save").disabled = true;
