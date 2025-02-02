@@ -775,10 +775,28 @@ actor Miyu{
   };
   
   public shared func seedData() : async Text {
+
+    let user0 = {
+        id = Principal.fromText("2vxsx-fae");
+        username = "Karina Blu";
+        email = "karina@example.com";
+        location = "Surabaya";
+        description = "Dancer who lives for new experiences!!!";
+        interests = ["Dance", "Travel", "Cooking"];
+        photos = [];
+        connections = null;
+        connectionReqs = [
+        Principal.fromText("zs5u7-m6nsd-65goi-ejobf-grqtb-kblgo-z6gdp-b6hpm-bm72g-xxbm3-xqe"), 
+        Principal.fromText("diyiq-lzay3-paogz-ji5ks-axftj-zi2nn-vp54f-odazr-55aqb-z7w6m-5qe") ];
+        reqTo = [];
+        history = [Principal.fromText("evcpq-wcpll-mbjag-q5lt6-zbibn-a5evp-sweht-gpxan-v7mlx-ihfhs-fae")]; 
+        age = 24;
+    };
+
     let user1 = {
         id = Principal.fromText("bcogc-zszir-ch2hc-o3mwo-brkxq-mane7-wvyah-ayk7b-ykjc2-25zn4-wqe");
-        username = "Alice";
-        email = "alice@example.com";
+        username = "Jack London";
+        email = "jackie@example.com";
         location = "Jakarta";
         description = "Tech enthusiast";
         interests = ["Books", "Games", "Humor"];
@@ -792,29 +810,158 @@ actor Miyu{
 
     let user2 = {
         id = Principal.fromText("evcpq-wcpll-mbjag-q5lt6-zbibn-a5evp-sweht-gpxan-v7mlx-ihfhs-fae");
-        username = "Bob";
+        username = "Bob Kairos";
         email = "bob@example.com";
-        location = "Jakarta";
+        location = "Surabaya";
         description = "Loves coding";
         interests = ["Books", "Games", "Humor"];
         photos = [];
         connections = ?Principal.fromText("aaaaa-aa");
         connectionReqs = [];
         reqTo = [];
+        history = [Principal.fromText("2vxsx-fae")]; 
+        age = 27;
+    };
+
+    let user3 = {
+        id = Principal.fromText("h6sq2-nrmt3-4slhf-ore6i-3geap-ncy62-rfm2a-ldxhr-tnktw-r5zr3-pqe");
+        username = "Zayden Luthor";
+        email = "zayden@example.com";
+        location = "Jakarta";
+        description = "Love to read";
+        interests = ["Books", "History", "Investment"];
+        photos = [];
+        connections = null;
+        connectionReqs = [];
+        reqTo = [];
         history = [];
-        age = 27
+        age = 25;
+    };
+    let user4 = {
+        id = Principal.fromText("zs5u7-m6nsd-65goi-ejobf-grqtb-kblgo-z6gdp-b6hpm-bm72g-xxbm3-xqe");
+        username = "Jaxon Negan";
+        email = "jaxon@example.com";
+        location = "Surabaya";
+        description = "Loves adventure";
+        interests = ["Adventure", "Cars", "Travel"];
+        photos = [];
+        connections = null;
+        connectionReqs = [];
+        reqTo = [Principal.fromText("2vxsx-fae")];
+        history = [];
+        age = 20;
+    };
+    let user5 = {
+        id = Principal.fromText("diyiq-lzay3-paogz-ji5ks-axftj-zi2nn-vp54f-odazr-55aqb-z7w6m-5qe");
+        username = "Orville Roland";
+        email = "roland@example.com";
+        location = "Surabaya";
+        description = "Loves to exercise";
+        interests = ["Yoga", "Fitness", "Dance"];
+        photos = [];
+        connections = null;
+        connectionReqs = [];
+        reqTo = [Principal.fromText("2vxsx-fae")];
+        history = [];
+        age = 25;
+    };
+
+    let user6 = {
+        id = Principal.fromText("ejioh-c54he-jrwxa-y2cer-tk2gz-hy5t3-xgzzy-gp74p-kspup-ekzji-2qe");
+        username = "Franklyn Quien";
+        email = "franklyn@example.com";
+        location = "Surabaya";
+        description = "Loves everything that makes money";
+        interests = ["Investment", "Business", "Education"];
+        photos = [];
+        connections = null;
+        connectionReqs = [];
+        reqTo = [];
+        history = []; 
+        age = 20;
     };
 
     let message1 = {
         from = user1.id;
-        to = user2.id;
+        to = user0.id;
         timestamp = Time.now();
-        content = "Hello Bob!";
+        content = "Haloo Karina!";
     };
 
-    users := Array.append(users, [user1, user2]);
-    chats := Array.append(chats, [message1]);
+    let message2 = {
+        from = user0.id;
+        to = user1.id;
+        timestamp = Time.now();
+        content = "Haloo jugaa";
+    };
+
+    let message4 = {
+        from = user3.id;
+        to = user0.id;
+        timestamp = Time.now();
+        content = "Hey Karina! I would like to know you better.";
+    };
+
+    let message5 = {
+        from = user0.id;
+        to = user3.id;
+        timestamp = Time.now();
+        content = "Boleee. What do you want me to call you?";
+    };
+
+    let message6 = {
+        from = user4.id;
+        to = user0.id;
+        timestamp = Time.now();
+        content = "Loh Karina! Inget aku ngga? Ini Jaxon dari SMA Global Prestasi.";
+    };
+
+    let message7 = {
+        from = user0.id;
+        to = user5.id;
+        timestamp = Time.now();
+        content = "Ehh itu di foto tanganmu kenapa?";
+    };
+
+    let message8 = {
+        from = user5.id;
+        to = user0.id;
+        timestamp = Time.now();
+        content = "Tanganku??? Ngga papa kok. EMang ada apaa??";
+    };
+
+    let message9 = {
+        from = user0.id;
+        to = user5.id;
+        timestamp = Time.now();
+        content = "Well, your hand looks lonely. I can hold it for you.";
+    };
+
+    let message10 = {
+        from = user5.id;
+        to = user0.id;
+        timestamp = Time.now();
+        content = "Ohwaw. Alright then, where should we meet?";
+    };
+
+    let message11 = {
+        from = user0.id;
+        to = user6.id;
+        timestamp = Time.now();
+        content = "All your pics came thru at a 45 degree angle.";
+    };
+
+    let message12 = {
+        from = user0.id;
+        to = user6.id;
+        timestamp = Time.now();
+        content = "Guess you're acute-y";
+    };
+
+    users := Array.append(users, [user0, user1, user2, user3, user4, user5, user6]);
+    chats := Array.append(chats, [message1, message2, message4, message5, message6, message7, message8, message9, message10, message11, message12]);
 
     return "Data seeded successfully!";
   }
 }
+
