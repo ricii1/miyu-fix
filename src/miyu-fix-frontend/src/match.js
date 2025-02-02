@@ -1,11 +1,17 @@
 import { miyu_fix_backend } from "../../declarations/miyu-fix-backend";
-
-// miyu_fix_backend.viewOtherReq()
-async function viewOtherReq() {
-    const response = await miyu_fix_backend.viewOtherReq();
-    console.log(response);
+import Swal from "sweetalert2";
+var username = "";
+var age = "";
+var location = "";
+var description = "";
+function fillForm(){
+    document.querySelector(".cpdname input").value = username;
+    document.querySelector(".cpdage input").value = age;
+    document.querySelector(".cpdcity input").value = location;
+    document.querySelector(".cpddesc input").value = description;    
 }
 
+// miyu_fix_backend.viewOtherReq()
 async function getMe(){
     const response = await miyu_fix_backend.getMe();
     console.log(response)
@@ -20,9 +26,163 @@ async function deleteRequest(id){
     console.log(response);
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    viewOtherReq();
-})
+window.addEventListener("load", async () => {
+    const isLoggedIn = await miyu_fix_backend.login();
+    if(isLoggedIn == "User not found!"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'User not found! You must register first!',
+            willClose: () => {
+                window.location.href = "src/login.html";
+            }
+        })
+    }
+    const getMe = await miyu_fix_backend.getMe();
+    username = getMe[1].username;
+    age = getMe[1].age;
+    location = getMe[1].location;
+    description = getMe[1].description;
+    fillForm();
+    document.querySelector("#profile-name").textContent = username;
+    let userRequest = await miyu_fix_backend.viewOtherReq();
+    console.log(userRequest);
+    const cardList = document.querySelector("#match-requests");
+    cardList.innerHTML = "";
+    userRequest.forEach(async(userID) => {
+        let user = await miyu_fix_backend.getUserDetail(userID);
+        user = user[1];
+        console.log(user);
+        const card = document.createElement("div");
+        card.classList.add("card-req");
+
+        const userLink = document.createElement("a");
+        userLink.href = `click-profile.html`;
+
+        const userImg = document.createElement("img");
+        const imgUrl = URL.createObjectURL(new Blob([user.photos[0]]));
+        userImg.src = imgUrl;
+        userImg.alt = user.username + " picture";
+
+        const userDetails = document.createElement("div");
+        userDetails.classList.add("details");
+        userDetails.innerHTML = `${user.username}, ${user.age}<br><span>${user.location}</span>`;
+
+        userLink.appendChild(userImg);
+        userLink.appendChild(userDetails);
+
+        const actionIcons = document.createElement("div");
+        actionIcons.classList.add("action-icons");
+
+        const checkIcon = document.createElement("div");
+        checkIcon.classList.add("check");
+        checkIcon.innerHTML = `<i class="fa-regular fa-circle-check"></i>`;
+        checkIcon.addEventListener("click", async() => {
+            let res = await miyu_fix_backend.accConnReq(user.id);
+            if(res.startsWith("Error")){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Connection request failed! ' + res,
+                }); 
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: res,
+                });
+            }
+        });
+
+        const xmarkIcon = document.createElement("div");
+        xmarkIcon.classList.add("xmark");
+        xmarkIcon.innerHTML = `<i class="fa-regular fa-circle-xmark"></i>`;
+        xmarkIcon.addEventListener("click", () => {
+            console.log("x", user.id);
+        });
+
+        actionIcons.appendChild(checkIcon);
+        actionIcons.appendChild(xmarkIcon);
+
+        card.appendChild(userLink);
+        card.appendChild(actionIcons);
+
+        cardList.appendChild(card);
+    });
+    const history = await miyu_fix_backend.getHistory();
+    const historyList = document.querySelector("#last-matches");
+    historyList.innerHTML="";
+    history.forEach(user => {
+        const userLink = document.createElement("a");
+        userLink.href = `profile.html?user=${user.id.toString()}`;
+        const userCard = document.createElement("div");
+        userCard.classList.add("card");
+        const userImg = document.createElement("img");
+        const imgUrl = URL.createObjectURL(new Blob([user.photos[0]]));
+        userImg.src = imgUrl;
+        userImg.alt = user.username + " picture";
+        const userDetails = document.createElement("div");
+        userDetails.classList.add("details");
+        userDetails.innerHTML = `${user.username}, ${user.age}<br><span>${user.location}</span>`;
+        userCard.appendChild(userImg);
+        userCard.appendChild(userDetails);
+        userLink.appendChild(userCard);
+        historyList.appendChild(userLink);
+    });
+    // console.log()
+});
+
+document.querySelector("#save").addEventListener("click", async (event) => {
+    event.preventDefault();
+    document.querySelector("#save").disabled = true;
+    const name = document.querySelector(".cpdname input").value;
+    const age = parseInt(document.querySelector(".cpdage input").value);
+    const city = document.querySelector(".cpdcity input").value;
+    const description = document.querySelector(".cpddesc input").value;
+    const interests = document.querySelector("#selected-interests").value.split(", ");
+    const file = document.querySelector("#fileUpload").files[0];
+    const response = await fetch(file);
+    console.log("Name:", name);
+    console.log("Age:", age);
+    console.log("City:", city);
+    console.log("Description:", description);
+    console.log("Interests:", interests);
+    const updateProfileRes = await miyu_fix_backend.updateProfile([name], [], [city], [age], [description]);
+    if(updateProfileRes != "Profile updated successfully!"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Profile update failed!',
+        });
+    }
+    const updateInterestRes = await miyu_fix_backend.updateInterests(interests);
+    if(updateInterestRes != "Interests updated successfully!"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Interests update failed!',
+        });
+    }
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+        const arrayBuffer = reader.result;
+        const uint8Array = new Uint8Array(arrayBuffer);
+        const addImage = await miyu_fix_backend.addImage(uint8Array);
+        if(addImage != "Image added successfully!"){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Image upload failed!',
+            });
+        }
+    };
+    reader.readAsArrayBuffer(file); 
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Profile updated successfully!'
+    });
+});
 
 const settingsbutton = document.getElementById("settingsbutton");
 const sidebar = document.querySelector(".setsidebar");

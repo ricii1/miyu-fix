@@ -1,6 +1,125 @@
+import { Principal } from "@dfinity/principal";
 import { miyu_fix_backend } from "../../declarations/miyu-fix-backend";
 import Swal from 'sweetalert2'
 
+var username = "";
+var age = "";
+var location = "";
+var description = "";
+function fillForm(){
+    document.querySelector(".cpdname input").value = username;
+    document.querySelector(".cpdage input").value = age;
+    document.querySelector(".cpdcity input").value = location;
+    document.querySelector(".cpddesc input").value = description;    
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+const userId = urlParams.get("user");
+
+function isValidPrincipal(principalStr) {
+    try {
+        Principal.fromText(principalStr);
+        return true; 
+    } catch (error) {
+        return false;
+    }
+}
+
+window.addEventListener("load", async () => {
+    const getMe = await miyu_fix_backend.getMe();
+    username = getMe[1].username;
+    age = getMe[1].age;
+    location = getMe[1].location;
+    description = getMe[1].description;
+    document.querySelector("#profile-name").textContent = username;
+    fillForm();
+    if(!isValidPrincipal(userId)){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Invalid user ID!',
+            willClose: () => {
+                window.location.href = "../index.html";
+            }
+        })
+    }
+    const response = await miyu_fix_backend.getUserDetail(Principal.fromText(userId));
+    const res = response[0];
+    if(res != "Success Getting User"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'User not found!',
+            willClose: () => {
+                window.location.href = "../index.html";
+            }
+        })
+    }
+    const profile = response[1];
+    document.querySelector(".profile-details .profile-name").textContent = `${profile.username}, ${profile.age}`;
+    document.querySelector(".profile-details .profile-location").textContent = profile.location;
+    document.querySelector(".profile-details .profile-description").textContent = profile.description;
+    // console.log(profile.connections);
+    if(profile.connections.length == 0){
+        document.querySelector(".profile-details .status-badge").textContent = "SINGLE";
+    }else {
+        document.querySelector(".profile-details .status-badge").textContent = "CONNECTED";
+    }
+    const interestsContainer = document.querySelector(".interests-container");
+    interestsContainer.innerHTML = "";
+    profile.interests.forEach(interest => {
+        const interestTag = document.createElement("div");
+        interestTag.className = "interest-tag";
+        interestTag.textContent = interest;
+        interestsContainer.appendChild(interestTag);
+    });
+
+    const gallery = document.querySelector("#gallery");
+    gallery.innerHTML = ""; // Clear existing content
+
+    const photos = profile.photos;
+
+    photos.forEach((photo, index) => {
+        const url = URL.createObjectURL(new Blob([photo]));
+        if(index == 0){
+            document.querySelector("#profile-image").src = url;
+        }else {
+            var cardList;
+            if ((index-1) % 4 === 0) {
+                cardList = document.createElement("div");
+                cardList.className = "card-list";
+                gallery.appendChild(cardList);
+            }
+            const card = document.createElement("div");
+            card.className = "card";
+            const img = document.createElement("img");
+            img.src = url;
+            img.alt = `Photo ${index + 1}`;
+            card.appendChild(img);
+            cardList.appendChild(card);
+        }
+    });
+});
+
+document.querySelector("#match-button").addEventListener("click", async (event) => {
+    event.preventDefault();
+    event.target.disabled = true;
+    const response = await miyu_fix_backend.sendConnReq(Principal.fromText(userId));
+    if(response.startsWith("Success")){
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Connection request sent successfully!'
+        });
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: response
+        });
+    }
+    event.target.disabled = false;
+});
 document.querySelector("#save").addEventListener("click", async (event) => {
     event.preventDefault();
     document.querySelector("#save").disabled = true;
@@ -9,22 +128,48 @@ document.querySelector("#save").addEventListener("click", async (event) => {
     const city = document.querySelector(".cpdcity input").value;
     const description = document.querySelector(".cpddesc input").value;
     const interests = document.querySelector("#selected-interests").value.split(", ");
-    // const profileImage = document.querySelector("#profile-img").src;
-    // const response = await fetch(profileImage);
-    // const blob = await response.blob();
+    const file = document.querySelector("#fileUpload").files[0];
+    const response = await fetch(file);
     console.log("Name:", name);
     console.log("Age:", age);
     console.log("City:", city);
     console.log("Description:", description);
     console.log("Interests:", interests);
+    const updateProfileRes = await miyu_fix_backend.updateProfile([name], [], [city], [age], [description]);
+    if(updateProfileRes != "Profile updated successfully!"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Profile update failed!',
+        });
+    }
+    const updateInterestRes = await miyu_fix_backend.updateInterests(interests);
+    if(updateInterestRes != "Interests updated successfully!"){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Interests update failed!',
+        });
+    }
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+        const arrayBuffer = reader.result;
+        const uint8Array = new Uint8Array(arrayBuffer);
+        const addImage = await miyu_fix_backend.addImage(uint8Array);
+        if(addImage != "Image added successfully!"){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Image upload failed!',
+            });
+        }
+    };
+    reader.readAsArrayBuffer(file); 
     Swal.fire({
         icon: 'success',
         title: 'Success',
         text: 'Profile updated successfully!'
     });
-    // console.log(interests);e
-    alert(interests);
-    // const response = await miyu_fix_backend.updateProfile(username, age, location, description, interests);
 });
 const settingsbutton = document.getElementById("settingsbutton");
 const sidebar = document.querySelector(".setsidebar");

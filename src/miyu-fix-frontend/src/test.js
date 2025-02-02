@@ -1,6 +1,10 @@
 import { Principal } from "@dfinity/principal";
 import { miyu_fix_backend } from "../../declarations/miyu-fix-backend";
 import Swal from "sweetalert2";
+
+const urlParams = new URLSearchParams(window.location.search);
+const userId = urlParams.get("user");
+
 document.querySelector("#save").addEventListener("click", async (event) => {
     event.preventDefault();
     document.querySelector("#save").disabled = true;
@@ -10,8 +14,7 @@ document.querySelector("#save").addEventListener("click", async (event) => {
     reader.onloadend = async () => {
         const arrayBuffer = reader.result;
         const uint8Array = new Uint8Array(arrayBuffer);
-        let userID = "evcpq-wcpll-mbjag-q5lt6-zbibn-a5evp-sweht-gpxan-v7mlx-ihfhs-fae";
-        const addImage = await miyu_fix_backend.addImagebyID(Principal.fromText(userID), uint8Array);
+        const addImage = await miyu_fix_backend.addImagebyID(Principal.fromText(userId), uint8Array);
         if(addImage != "Image added successfully!"){
             Swal.fire({
                 icon: 'error',

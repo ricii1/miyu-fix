@@ -18,14 +18,14 @@
         <aside class="sidebar">
             <div class="logo">miyu</div>
             <nav class="menu">
-                <a href="../index.html" class="menu-item"><img src="../assets/homeicon.png" alt="homeicon" class="homeicon">Home</a>
-                <a href="match.html" class="menu-item"><img src="../assets/matchicon.png" alt="matchicon" class="matchicon">Matches</a>
-                <a href="chat.html" class="menu-item"><img src="../assets/chaticon.png" alt="chaticon" class="chaticon">Chat</a>
-                <a href="profile.html" class="menu-item"><img src="../assets/profileicon.png" alt="profileicon" class="profileicon">Profile</a>
+                <a href="../index.html" class="menu-item"><img src="/homeicon.png" alt="homeicon" class="homeicon">Home</a>
+                <a href="match.html" class="menu-item"><img src="/matchicon.png" alt="matchicon" class="matchicon">Matches</a>
+                <a href="chat.html" class="menu-item"><img src="/chaticon.png" alt="chaticon" class="chaticon">Chat</a>
+                <a href="profile.html" class="menu-item"><img src="/profileicon.png" alt="profileicon" class="profileicon">Profile</a>
             </nav>
             <nav class="settings">
                 <button id="settingsbutton">
-                  <a href="#settings" class="menu-item"><img src="../assets/settingicon.png" alt="settingicon" class="settingicon">Settings</a>
+                  <a href="#settings" class="menu-item"><img src="/settingicon.png" alt="settingicon" class="settingicon">Settings</a>
               </button>
               <a href="login.html" class="menu-item">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
@@ -85,7 +85,7 @@
                 <div class="cp">
                     <!-- Profile Image Section -->
                     <a href="#" id="change-pp">
-                        <img id="profile-img" src="../assets/your_pfp.png" alt="cp"/>
+                        <img id="profile-img" src="/your_pfp.png" alt="cp"/>
                     </a>
                     <input type="file" id="image-input" accept="image/*">
                     <span>Change Profile</span>
@@ -170,7 +170,7 @@
                         </label>
                     </div>
                     <div class="submit">
-                        <button type="submit" class="submit-btn">Save</button>
+                        <button type="submit" class="submit-btn" id="save">Save</button>
                     </div>
                 </div>
             </form>
@@ -214,32 +214,32 @@
         <main class="main-content">
             <header class="header">
                 <a href="#Changelocation" id="fetch-location-link">
-                    <div class="location"> <img src="../assets/loc_icon.png" alt="instance"  class="locloc"/>
+                    <div class="location"> <img src="/loc_icon.png" alt="instance"  class="locloc"/>
                         <span id="user-location">Click To Fetch Location</span>
                     </div>
                     </a>
                 <form>
                     <div class="search">
-                        <button id="menu-button"><img src="../assets/menuicon.png" class="menu-icon" alt="menu-icon"></button>
+                        <button id="menu-button"><img src="/menuicon.png" class="menu-icon" alt="menu-icon"></button>
                         <input class="search-input" type="search" placeholder="Search">
                         <button id="search-button"><span class="search-icon material-symbols-outlined">search</span></button>
                     </div>
                 </form>
                 <div class="profile">
                     <a href="profile.html">
-                    <span>Hi, (Your name)!</span>
+                    <span>Hi, <span id="profile-name"></span>!</span>
                     </a>
                     <a href="profile.html">
-                        <img src="../assets/your_pfp.png" alt="Profile Picture" class="profile-pic">
+                        <img src="/your_pfp.png" alt="Profile Picture" class="profile-pic">
                     </a>
                 </div>
             </header>
             <section class="cards-section">
                 <h2>Match Request</h2>
-                <div class="card-list">
+                <div class="card-list" id="match-requests">
                         <div class="card-req">
                             <a href="click-profile.html">
-                            <img src="../assets/Person1.png" alt="Person1">
+                            <img src="/Person1.png" alt="Person1">
                             <div class="details">(Person5), 27<br><span>Jakarta</span></div>
                             </a>
                                 <div class="action-icons">
@@ -249,7 +249,7 @@
                         </div>
                     <div class="card-req">
                         <a href="click-profile.html">
-                        <img src="../assets/Person2.png" alt="Person2">
+                        <img src="/Person2.png" alt="Person2">
                         <div class="details">(Person6), 27<br><span>Jakarta</span></div>
                         </a>
                         <div class="action-icons">
@@ -260,28 +260,28 @@
                     </div>
                 </div>
                 <h2>Your Last Match</h2>
-                <div class="card-list">
+                <div class="card-list" id="last-matches">
                     <a href="click-profile.html">
-                    <div class="card">
-                        <img src="../assets/Person1.png" alt="Person5">
-                        <div class="details">(Person5), 27<br><span>Jakarta</span></div>
-                    </div>
+                        <div class="card">
+                            <img src="/Person1.png" alt="Person5">
+                            <div class="details">(Person5), 27<br><span>Jakarta</span></div>
+                        </div>
                     </a>
                     <a href="click-profile.html">
                     <div class="card">
-                        <img src="../assets/Person2.png" alt="Person6">
+                        <img src="/Person2.png" alt="Person6">
                         <div class="details">(Person6), 27<br><span>Jakarta</span></div>
                     </div>
                     </a>
                     <a href="click-profile.html">
                     <div class="card">
-                        <img src="../assets/Person3.png" alt="Person7">
+                        <img src="/Person3.png" alt="Person7">
                         <div class="details">(Person7), 27<br><span>Jakarta</span></div>
                     </div>
                     </a>
                     <a href="click-profile.html">
                     <div class="card">
-                        <img src="../assets/Person4.png" alt="Person8">
+                        <img src="/Person4.png" alt="Person8">
                         <div class="details">(Person8), 27<br><span>Jakarta</span></div>
                     </div>
                     </a>

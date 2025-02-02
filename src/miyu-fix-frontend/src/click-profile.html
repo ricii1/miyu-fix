@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-    <script defer src="home.js"></script>
+    <script defer src="click-profile.js" type="module"></script>
 </head>
 <body>
     <div class="container">
@@ -19,14 +19,14 @@
         <aside class="sidebar">
             <div class="logo">miyu</div>
             <nav class="menu">
-                <a href="../index.html" class="menu-item"><img src="../assets/homeicon.png" alt="homeicon" class="homeicon">Home</a>
-                <a href="match.html" class="menu-item"><img src="../assets/matchicon.png" alt="matchicon" class="matchicon">Matches</a>
-                <a href="chat.html" class="menu-item"><img src="../assets/chaticon.png" alt="chaticon" class="chaticon">Chat</a>
-                <a href="profile.html" class="menu-item"><img src="../assets/profileicon.png" alt="profileicon" class="profileicon">Profile</a>
+                <a href="../index.html" class="menu-item"><img src="/homeicon.png" alt="homeicon" class="homeicon">Home</a>
+                <a href="match.html" class="menu-item"><img src="/matchicon.png" alt="matchicon" class="matchicon">Matches</a>
+                <a href="chat.html" class="menu-item"><img src="/chaticon.png" alt="chaticon" class="chaticon">Chat</a>
+                <a href="profile.html" class="menu-item"><img src="/profileicon.png" alt="profileicon" class="profileicon">Profile</a>
             </nav>
             <nav class="settings">
                 <button id="settingsbutton">
-                    <a href="#settings" class="menu-item"><img src="../assets/settingicon.png" alt="settingicon" class="settingicon">Settings</a>
+                    <a href="#settings" class="menu-item"><img src="/settingicon.png" alt="settingicon" class="settingicon">Settings</a>
                 </button>
                 <a href="login.html" class="menu-item">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
@@ -63,7 +63,7 @@
                 <div class="cp">
                     <!-- Profile Image Section -->
                     <a href="#" id="change-pp">
-                        <img id="profile-img" src="../assets/your_pfp.png" alt="cp"/>
+                        <img id="profile-img" src="/your_pfp.png" alt="cp"/>
                     </a>
                     <input type="file" id="image-input" accept="image/*">
                     <span>Change Profile</span>
@@ -148,7 +148,7 @@
                         </label>
                     </div>
                     <div class="submit">
-                        <button type="submit" class="submit-btn">Save</button>
+                        <button type="submit" class="submit-btn" id="save">Save</button>
                     </div>
                 </div>
             </form>
@@ -192,23 +192,23 @@
         <main class="main-content">
             <header class="header">
                 <a href="#Changelocation" id="fetch-location-link">
-                    <div class="location"> <img src="../assets/loc_icon.png" alt="instance" class="locloc"/>
+                    <div class="location"> <img src="/loc_icon.png" alt="instance" class="locloc"/>
                         <span id="user-location">Click To Fetch Location</span>
                     </div>
                     </a>
                 <form>
                     <div class="search">
-                        <button id="menu-button"><img src="../assets/menuicon.png" class="menu-icon" alt="menu-icon"></button>
+                        <button id="menu-button"><img src="/menuicon.png" class="menu-icon" alt="menu-icon"></button>
                         <input class="search-input" type="search" placeholder="Search">
                         <button id="search-button"><span class="search-icon material-symbols-outlined">search</span></button>
                     </div>
                 </form>
                 <div class="profile">
                     <a href="profile.html">
-                    <span>Hi, (Your name)!</span>
+                    <span>Hi, <span id="profile-name"></span>!</span>
                     </a>
                     <a href="profile.html">
-                        <img src="../assets/your_pfp.png" alt="Profile Picture" class="profile-pic">
+                        <img src="/your_pfp.png" alt="Profile Picture" class="profile-pic">
                     </a>
                 </div>
             </header>
@@ -217,45 +217,29 @@
                 <div class="profile-container">
                     <div class="profile-content">
                         <div class="profile-image-column">
-                            <img src="../assets/chris2.jpg" alt="Profile photo of Chris" class="profile-main-image" />
+                            <img alt="Profile photo" class="profile-main-image" id="profile-image" />
                         </div>
                         <div class="profile-info-column">
                             <div class="profile-details">
-                                <div class="status-badge">SINGLE</div>
-                                <h1 class="profile-name">Chris, 27</h1>
-                                <div class="profile-location">JAKARTA</div>
+                                <div class="status-badge"></div>
+                                <h1 class="profile-name"></h1>
+                                <div class="profile-location"></div>
                                 <div class="action-container">
-                                    <button class="match-button" tabindex="0">MATCH</button>
+                                    <button class="match-button" tabindex="0" id="match-button">MATCH</button>
                                 </div>
                                 <h2 class="section-title">Description</h2>
                                 <p class="profile-description">
-                                    Crafting beats by day, vibing to vinyl by night. I live for deep conversations, good vibes, and spontaneous adventures. If you're into concerts, exploring new sounds, or grabbing late-night tacos, we'll get along great. Let's create a playlist together—your favorite song might just inspire my next track. 🎶
                                 </p>
                                 <h2 class="section-title">Interest</h2>
                                 <div class="interests-section">
                                     <div class="interests-container">
-                                        <div class="interest-tag" tabindex="0">Music</div>
-                                        <div class="interest-tag" tabindex="0">Gaming</div>
-                                        <div class="interest-tag" tabindex="0">Photography</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <h2 class="section-title">Gallery</h2>
-                    <div class="card-list">
-                        <div class="card">
-                            <img src="../assets/chris3.jpg" alt="Person5">
-                        </div>
-                        <div class="card">
-                            <img src="../assets/chris4.jpg" alt="Person6">
-                        </div>
-                        <div class="card">
-                            <img src="../assets/chris5.jpg" alt="Person7">
-                        </div>
-                        <div class="card">
-                            <img src="../assets/chris6.jpg" alt="Person8">
-                        </div>
+                    <div id="gallery">
                     </div>
                 </div>
             </section>

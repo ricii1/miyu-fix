@@ -40,7 +40,7 @@ window.addEventListener("load", async () => {
     cardList.innerHTML = "";
     usersWithSameLocation.forEach(user => {
         const userLink = document.createElement("a");
-        userLink.href = `profile.html?user=${user.id.toString()}`;
+        userLink.href = `src/click-profile.html?user=${user.id.toString()}`;
         const userCard = document.createElement("div");
         userCard.classList.add("card");
         const userImg = document.createElement("img");
@@ -68,7 +68,7 @@ window.addEventListener("load", async () => {
         usersWithSameInterest.forEach(user => {
             console.log(user.id.toString());
             const userLink = document.createElement("a");
-            userLink.href = `profile.html?user=${user.id.toString()}`;
+            userLink.href = `src/click-profile.html?user=${user.id.toString()}`;
             const userCard = document.createElement("div");
             userCard.classList.add("card");
             const userImg = document.createElement("img");

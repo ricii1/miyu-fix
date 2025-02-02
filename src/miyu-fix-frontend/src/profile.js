@@ -27,6 +27,11 @@ window.addEventListener("load", async () => {
     age = getMe[1].age;
     location = getMe[1].location;
     description = getMe[1].description;
+    if(getMe[1].connections.length == 0){
+        document.querySelector(".profile-details .status-badge").textContent = "SINGLE";
+    }else {
+        document.querySelector(".profile-details .status-badge").textContent = "CONNECTED";
+    }
     document.querySelector("#title-username").textContent = username;
     document.querySelector("#title-age").textContent = age;
     document.querySelector("#title-location").textContent = location.toUpperCase();
