@@ -48,7 +48,7 @@ window.addEventListener("load", async () => {
         }
 
         Object.values(chatGroups).forEach(chats => 
-            chats.sort((a, b) => Number(b.timestamp) - Number(a.timestamp))
+            chats.sort((a, b) => Number(a.timestamp) - Number(b.timestamp))
         );
         updateChatWindow(chatGroups, idCaller);
         updateContactList(chatGroups);
@@ -99,7 +99,6 @@ function updateChatWindow(chatGroups, idCaller) {
         let chatContainer = document.createElement("div");
         chatContainer.classList.add("personchat");
         chatContainer.dataset.chat = `chat-${partner}`;
-        chatGroups[partner].map(message => console.log((message.from.toString())));
         let partnerPhoto = chatGroups[partner][0].partnerDetails.photos[0];
         let partnerID = chatGroups[partner][0].partnerDetails.id.toString();
         const url = URL.createObjectURL(new Blob([partnerPhoto]));
@@ -125,17 +124,28 @@ function updateChatWindow(chatGroups, idCaller) {
                     </div>
                 `).join('')}
             </section>
-            <form>
+            <form class="chat-form">
                 <div class="typing">
                     <label for="cam"><img src="/camicon.png" class="typing-label"></label>
                     <input id="cam" type="file" accept="image/*">
-                    <input class="text" id="filename" type="text" placeholder="Type message here...">
+                    <input class="text message-input" id="filename" type="text" placeholder="Type message here...">
                     <div class="submit">
                         <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
                     </div>
                 </div>
             </form>
         `;
+        const form = chatContainer.querySelector(".chat-form");
+        const input = chatContainer.querySelector(".message-input");
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const messageText = input.value.trim();
+            if (messageText) {
+                await miyu_fix_backend.sendMessage(Principal.fromText(partnerID), messageText);
+                input.value = "";
+                window.location.reload(); // Reload the window after sending the message
+            }
+        });
         mainContent.appendChild(chatContainer);
     });
 }
