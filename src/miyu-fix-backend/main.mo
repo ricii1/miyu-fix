@@ -79,6 +79,64 @@ actor Miyu {
     return ("Success Getting User ", findUser);
   };
 
+    public query (msg) func getMeWithoutPhotos() : async (Text, User) {
+    //kembaliin data + update data if need
+    if (not checkUserExist(msg.caller)) {
+      let user : User = {
+        id = msg.caller;
+        username = "";
+        email = "";
+        location = "";
+        age = 0;
+        description = "";
+        interests = [];
+        photos = [];
+        connections = null;
+        connectionReqs = [];
+        reqTo = [];
+        history = [];
+      };
+      return ("User not found!", user);
+    };
+    let findUser : User = switch (Array.find<User>(users, func(user : User) : Bool { user.id == msg.caller })) {
+      case (null) {
+        let user : User = {
+          id = msg.caller;
+          username = "";
+          email = "";
+          age = 0;
+          location = "";
+          description = "";
+          interests = [];
+          photos = [];
+          connections = null;
+          connectionReqs = [];
+          reqTo = [];
+          history = [];
+        };
+        return ("User not found!", user);
+      };
+      case (?user) {
+        let userRes : User = {
+          id = user.id;
+          username = user.username;
+          email = user.email;
+          age = user.age;
+          location = user.location;
+          description = user.description;
+          interests = user.interests;
+          photos = [];
+          connections = user.connections;
+          connectionReqs = user.connectionReqs;
+          reqTo = user.reqTo;
+          history = user.history;
+        };
+        return ("Success Getting User ", userRes);
+      };
+    };
+    return ("Success Getting User ", findUser);
+  };
+
   public query func getUserDetail(userId : Principal) : async (Text, User) {
     if (not checkUserExist(userId)) {
       let user : User = {
@@ -1218,5 +1276,48 @@ actor Miyu {
     chats := Array.append(chats, [message1, message2, message4, message5, message6, message7, message8, message9, message10, message11, message12]);
 
     return "Data seeded successfully!";
-  }
+  };
+
+  public shared func seedUser() : async Text {
+    let user0Id = Principal.fromText("2vxsx-fae");
+        users := Array.map<User, User>(
+      users,
+      func(user : User) : User {
+        if (user.id == user0Id) {
+          return {
+            id = user.id;
+            username = user.username;
+            email = user.email;
+            location = user.location;
+            description = user.description;
+            interests = user.interests;
+            photos = user.photos;
+            connections = user.connections;
+            connectionReqs = [
+              Principal.fromText("zs5u7-m6nsd-65goi-ejobf-grqtb-kblgo-z6gdp-b6hpm-bm72g-xxbm3-xqe"), 
+              Principal.fromText("diyiq-lzay3-paogz-ji5ks-axftj-zi2nn-vp54f-odazr-55aqb-z7w6m-5qe")
+            ];
+            reqTo = user.reqTo;
+            history = [
+              Principal.fromText("evcpq-wcpll-mbjag-q5lt6-zbibn-a5evp-sweht-gpxan-v7mlx-ihfhs-fae")
+            ];
+            age = user.age;
+          };
+        } else {
+          return user;
+        }
+      }
+    );
+    return "seeder success";
+  };
+  public shared func removeUser() : async Text {
+    let user0Id = Principal.fromText("2vxsx-fae");
+    users := Array.filter<User>(
+      users,
+      func(user : User) : Bool {
+        return user.id != user0Id;
+      },
+    );
+    return "User removed successfully!";
+  };
 }
